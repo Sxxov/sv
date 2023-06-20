@@ -1,0 +1,157 @@
+{
+	"name": "@sxxov/sv",
+	"version": "0.1.0",
+	"description": "",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev --host --https",
+		"build": "svelte-package",
+		"preview": "vite preview",
+		"postinstall": "patch-package",
+		"prepare": "ts-patch install -s",
+		"prepublishOnly": "svelte-package"
+	},
+	"keywords": ["ui", "svelte", "component", "library", "package", "opinionated"],
+	"author": "",
+	"license": "MIT",
+	"publishConfig": {
+		"access": "public"
+	},
+	"peerDependencies": {
+		"@sveltejs/kit": "^1.20.4",
+		"svelte": "^3.59.1"
+	},
+	"devDependencies": {
+		"@rollup/plugin-alias": "^5.0.0",
+		"@rollup/plugin-node-resolve": "^15.1.0",
+		"@sveltejs/adapter-netlify": "^2.0.7",
+		"@sveltejs/package": "^2.0.2",
+		"@types/postcss-import": "^14.0.0",
+		"@types/uuid": "^9.0.2",
+		"@types/youtube": "^0.0.47",
+		"@typescript-eslint/eslint-plugin": "^5.59.11",
+		"@typescript-eslint/parser": "^5.59.11",
+		"@vitejs/plugin-basic-ssl": "^1.0.1",
+		"autoprefixer": "^10.4.14",
+		"cssnano": "^6.0.1",
+		"eslint": "^8.43.0",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-config-xo": "^0.43.1",
+		"eslint-config-xo-typescript": "^0.57.0",
+		"eslint-plugin-only-warn": "^1.1.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"patch-package": "^7.0.0",
+		"postcss": "^8.4.24",
+		"postcss-class-apply": "^4.0.1",
+		"postcss-font-grabber": "^3.1.0",
+		"postcss-import": "^15.1.0",
+		"postcss-import-url": "^7.2.0",
+		"postcss-load-config": "^4.0.1",
+		"postcss-mixins": "^9.0.4",
+		"postcss-nested": "^6.0.1",
+		"prettier": "^2.8.8",
+		"prettier-plugin-jsdoc": "^0.4.2",
+		"prettier-plugin-svelte": "^2.10.1",
+		"rollup-plugin-import-assets": "^1.1.1",
+		"stylelint": "^15.8.0",
+		"stylelint-config-standard": "^33.0.0",
+		"svelte-preprocess": "^5.0.4",
+		"ts-patch": "^3.0.0",
+		"typescript": "5.1",
+		"uuid": "^9.0.0",
+		"vite": "^4.3.9",
+		"vite-imagetools": "^5.0.4",
+		"vite-plugin-copy": "^0.1.6"
+	},
+	"dependencies": {
+		"@studio-freight/lenis": "^1.0.16",
+		"@sxxov/ut": "^2.3.0",
+		"lottie-web": "^5.12.2",
+		"maic": "^0.14.9-1"
+	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		},
+		"./ut/stores": {
+			"types": "./dist/ut/stores/index.d.ts",
+			"import": "./dist/ut/stores/index.js"
+		},
+		"./ut/transition": {
+			"types": "./dist/ut/transition/index.d.ts",
+			"import": "./dist/ut/transition/index.js"
+		},
+		"./ut/use": {
+			"types": "./dist/ut/use/index.d.ts",
+			"import": "./dist/ut/use/index.js"
+		},
+		"./toast": {
+			"types": "./dist/toast/index.d.ts",
+			"import": "./dist/toast/index.js",
+			"svelte": "./dist/toast/index.js"
+		},
+		"./svg": {
+			"types": "./dist/svg/index.d.ts",
+			"import": "./dist/svg/index.js",
+			"svelte": "./dist/svg/index.js"
+		},
+		"./misc": {
+			"types": "./dist/misc/index.d.ts",
+			"import": "./dist/misc/index.js",
+			"svelte": "./dist/misc/index.js"
+		},
+		"./lottie": {
+			"types": "./dist/lottie/index.d.ts",
+			"import": "./dist/lottie/index.js",
+			"svelte": "./dist/lottie/index.js"
+		},
+		"./loaders": {
+			"types": "./dist/loaders/index.d.ts",
+			"import": "./dist/loaders/index.js",
+			"svelte": "./dist/loaders/index.js"
+		},
+		"./list": {
+			"types": "./dist/list/index.d.ts",
+			"import": "./dist/list/index.js",
+			"svelte": "./dist/list/index.js"
+		},
+		"./layout": {
+			"types": "./dist/layout/index.d.ts",
+			"import": "./dist/layout/index.js",
+			"svelte": "./dist/layout/index.js"
+		},
+		"./input": {
+			"types": "./dist/input/index.d.ts",
+			"import": "./dist/input/index.js",
+			"svelte": "./dist/input/index.js"
+		},
+		"./functional": {
+			"types": "./dist/functional/index.d.ts",
+			"import": "./dist/functional/index.js",
+			"svelte": "./dist/functional/index.js"
+		},
+		"./common": {
+			"types": "./dist/common/index.d.ts",
+			"import": "./dist/common/index.js"
+		},
+		"./common/enums": {
+			"types": "./dist/common/enums/index.d.ts",
+			"import": "./dist/common/enums/index.js"
+		},
+		"./button": {
+			"types": "./dist/button/index.d.ts",
+			"import": "./dist/button/index.js",
+			"svelte": "./dist/button/index.js"
+		},
+		"./animation": {
+			"types": "./dist/animation/index.d.ts",
+			"import": "./dist/animation/index.js",
+			"svelte": "./dist/animation/index.js"
+		}
+	},
+	"svelte": "./dist/index.js"
+}
