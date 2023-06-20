@@ -13,7 +13,7 @@
 	export let colourTextHover: TCss = colourText;
 	export let colourTextActive: TCss = colourText;
 	export let colourTextDisabled: TCss = '----colour-text-secondary';
-	export let width: TCss = 'max-content';
+	export let width: TCss = '100%';
 	export let height: TCss = 56;
 	export let roundness: TCss = '----roundness';
 	export let shadow: TCss = '----shadow-md';
