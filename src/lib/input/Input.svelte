@@ -25,11 +25,12 @@
 	export let value = '';
 	export let autocomplete: HTMLInputElement['autocomplete'] = 'off';
 	export let type: HTMLInputElement['type'] = 'text';
+	export let active = false;
 
-	let active = false;
 	let input: HTMLInputElement | undefined;
 
 	$: id ??= `input--${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+	$: active ? input?.focus() : input?.blur();
 </script>
 
 <div
@@ -89,6 +90,7 @@
 		>
 			<Button
 				{...ButtonVariants.FabRegularSecondary}
+				colourBackground="transparent"
 				shadow="----shadow-none"
 				on:click={() => {
 					if (input) {
@@ -203,7 +205,7 @@
 			}
 
 			& > input {
-				padding-left: calc(17.5px + 24px + 7px);
+				padding-left: calc(28px + 24px + 7px);
 			}
 		}
 
@@ -216,7 +218,7 @@
 			}
 
 			& > input {
-				padding-right: calc(17.5px + 24px + 7px);
+				padding-right: calc(28px + 24px + 7px);
 			}
 		}
 	}
