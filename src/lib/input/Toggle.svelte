@@ -99,6 +99,7 @@
 		background: var(--colour-background);
 		border: 0;
 
+		outline: 1px solid var(--colour-background);
 		box-shadow: var(----shadow-inner-none), var(----shadow-sm);
 		border-radius: var(----roundness);
 
