@@ -2,8 +2,6 @@
 	import { css, type TCss } from '@sxxov/ut/css';
 	import Ripple from './Ripple.svelte';
 	import Spacer from '../layout/Spacer.svelte';
-	import { onMount } from 'svelte';
-	import LineLoader from '../loaders/LineLoader.svelte';
 
 	export let colourBackground: TCss = '----colour-background-secondary';
 	export let colourBackgroundHover: TCss = '----colour-background-tertiary';
@@ -24,12 +22,6 @@
 								   box-shadow 0.3s var(----ease-fast-slow),
 								   transform 0.3s var(----ease-fast-slow)`;
 	export let type: 'button' | 'submit' | 'reset' = 'button';
-
-	let hasMounted = false;
-
-	onMount(() => {
-		hasMounted = true;
-	});
 </script>
 
 <button
@@ -53,30 +45,27 @@
 	"
 	class:left={$$slots.left}
 	class:right={$$slots.right}
+	on:touchstart
+	on:touchend
+	on:touchcancel
+	on:mousedown
+	on:mouseup
 	on:click
 >
 	<slot name="background">
 		<div class="default background" />
 	</slot>
 
-	{#if hasMounted}
-		<slot name="content">
-			<div class="default content">
-				<slot name="left" /><slot /><slot name="right"
-					>{#if $$slots.left}<Spacer
-							width={24}
-							height={16}
-						/>{/if}</slot
-				>
-			</div>
-		</slot>
-	{:else}
-		<slot name="loader">
-			<div class="default loader">
-				<LineLoader />
-			</div>
-		</slot>
-	{/if}
+	<slot name="content">
+		<div class="default content">
+			<slot name="left" /><slot /><slot name="right"
+				>{#if $$slots.left}<Spacer
+						width={24}
+						height={16}
+					/>{/if}</slot
+			>
+		</div>
+	</slot>
 
 	<div class="ripple">
 		<Ripple />
@@ -158,21 +147,6 @@
 			outline-offset: -1px;
 
 			transition: var(--transition);
-		}
-
-		& > .default.loader {
-			position: relative;
-			z-index: 1;
-			width: 100%;
-			height: 100%;
-
-			display: flex;
-			align-items: center;
-			justify-content: center;
-
-			text-align: center;
-
-			user-select: none;
 		}
 
 		/*
