@@ -1,5 +1,10 @@
+export { default as BottomSheet } from './BottomSheet.svelte';
 export * from './BottomSheet.svelte';
+export { default as Card } from './Card.svelte';
 export * from './Card.svelte';
+export { default as Dialog } from './Dialog.svelte';
 export * from './Dialog.svelte';
+export { default as Masonry } from './Masonry.svelte';
 export * from './Masonry.svelte';
+export { default as Spacer } from './Spacer.svelte';
 export * from './Spacer.svelte';
