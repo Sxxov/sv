@@ -4,23 +4,20 @@
 
 	export let height: TCss = '16px';
 	export let width: TCss = '24px';
-
 	export let svg: TSvgString;
 	export let colour: TCss = '----colour-text-primary';
-
-	$: sizeCorrectedSvg = svg
-		.replace(/(height=")\s*.*?\s*(?=")/, `$1${css(height)}`)
-		.replace(/(width=")\s*.*?\s*(?=")/, `$1${css(width)}`);
 </script>
 
-<span
+<div
 	class="component"
 	style="
 		--colour-svg: {css(colour)};
+		--height-svg: {css(height)};
+		--width-svg: {css(width)};
 	"
 >
-	{@html sizeCorrectedSvg}
-</span>
+	{@html svg}
+</div>
 
 <style lang="postcss">
 	.component {
@@ -32,5 +29,11 @@
 		fill: var(--colour-svg);
 
 		transition: fill 0.2s var(----ease-fast-slow);
+
+		& > :global(svg) {
+			display: block;
+			height: var(--height-svg);
+			width: var(--width-svg);
+		}
 	}
 </style>
