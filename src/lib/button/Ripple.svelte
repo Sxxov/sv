@@ -1,24 +1,23 @@
-<script context="module">
+<script
+	context="module"
+	lang="ts"
+>
 	const GRADIENT_ID = 'ripple--gradient';
+
+	let instanceCount = new Store(0);
 </script>
 
 <script lang="ts">
-	import { css, type TCss } from '@sxxov/ut/css';
 	import { Composition, Tween } from '@sxxov/ut/animation';
 	import { bezierExpoOut } from '@sxxov/ut/bezier/beziers';
+	import { css, type TCss } from '@sxxov/ut/css';
 
-	import { singleton } from '../common/singleton';
 	import { clamp } from '@sxxov/ut/math';
+	import { Store } from '@sxxov/ut/store';
 	import { resolveEventClientPoint, type IPoint } from '@sxxov/ut/viewport';
-	import { whenResize } from '../ut/use/whenResize';
+	import { onDestroy, onMount } from 'svelte';
 	import Rr from '../functional/Rr.svelte';
-
-	const {
-		mount: acquireLockRippleGradient,
-		shouldMount: shouldMountRippleGradient,
-	} = singleton(GRADIENT_ID);
-
-	$: console.log($shouldMountRippleGradient);
+	import { whenResize } from '../ut/use/whenResize';
 
 	export let width: TCss = '100%';
 	export let height: TCss = '100%';
@@ -29,6 +28,7 @@
 	export let durationMin = 0;
 	export let durationMax = 3000;
 
+	let instanceIndex = 0;
 	let rippleData: {
 		point: IPoint;
 		tweenSize: Tween;
@@ -37,14 +37,21 @@
 	let svgWidth = 0;
 	let svgHeight = 0;
 
-	$: console.log({ svgHeight, svgWidth });
-
 	$: size = clamp(
 		Math.hypot(svgWidth / 2, svgHeight / 2) * 800,
 		sizeMin,
 		sizeMax,
 	);
 	$: duration = clamp(size / 2, durationMin, durationMax);
+
+	onMount(() => {
+		instanceIndex = $instanceCount;
+		++$instanceCount;
+	});
+
+	onDestroy(() => {
+		--$instanceCount;
+	});
 
 	// browsers on touch screens emit a mousedown & mouseup event,
 	// even on touches...
@@ -130,8 +137,8 @@
 		svgHeight = height;
 	}}
 >
-	{#if $shouldMountRippleGradient}
-		<defs use:acquireLockRippleGradient>
+	{#if instanceIndex === $instanceCount - 1}
+		<defs>
 			<radialGradient id={GRADIENT_ID}>
 				<stop
 					offset="0%"
