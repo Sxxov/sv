@@ -18,7 +18,7 @@
 	export let roundness: TCss = '----roundness';
 	export let shadow: TCss = '----shadow-md';
 	export let disabled = false;
-	export let padding: TCss = '16px max(var(--roundness), 24px)';
+	export let padding: TCss = '16px max(var(--roundness), 14px)';
 	export let type: 'button' | 'submit' | 'reset' = 'button';
 
 	let hasMounted = false;
