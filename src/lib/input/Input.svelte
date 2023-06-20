@@ -124,8 +124,8 @@
 			justify-content: center;
 			gap: 7px;
 
-			top: calc(max(var(----roundness), 7px) - 17.5px);
-			left: calc(max(var(----roundness), 7px) - 17.5px);
+			top: calc(max(var(----roundness), 28px) - 17.5px);
+			left: calc(max(var(----roundness), 28px) - 17.5px);
 
 			color: var(--colour-label);
 			font-size: 1em;
