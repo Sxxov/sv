@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { dropIn } from '../ut/transition';
 
 	import { ButtonVariants } from '../button/ButtonVariants';
@@ -26,6 +27,7 @@
 	export let active = false;
 
 	let value = '';
+	let hasMounted = false;
 
 	$: searchedItems = items.filter(
 		(item) =>
@@ -35,11 +37,15 @@
 
 	$: selectedItem = items.find((item) => item.id === selectedItemId);
 
-	$: if (!active) {
+	$: if (hasMounted && !active) {
 		value = selectedItem?.title ?? '';
 		if (document.activeElement instanceof HTMLElement)
 			document.activeElement.blur();
 	}
+
+	onMount(() => {
+		hasMounted = true;
+	});
 </script>
 
 <div
