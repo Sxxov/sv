@@ -1,6 +1,6 @@
 {
 	"name": "@sxxov/sv",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "",
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -18,7 +18,14 @@
 		"prepare": "ts-patch install -s",
 		"prepublishOnly": "svelte-package"
 	},
-	"keywords": ["ui", "svelte", "component", "library", "package", "opinionated"],
+	"keywords": [
+		"ui",
+		"svelte",
+		"component",
+		"library",
+		"package",
+		"opinionated"
+	],
 	"author": "",
 	"license": "MIT",
 	"publishConfig": {
