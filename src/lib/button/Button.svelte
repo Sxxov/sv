@@ -19,6 +19,10 @@
 	export let shadow: TCss = '----shadow-md';
 	export let disabled = false;
 	export let padding: TCss = '16px max(var(--roundness), 14px)';
+	export let transition: TCss = `background 0.2s var(----ease-fast-slow),
+								   outline 0.3s var(----ease-slow-slow),
+								   box-shadow 0.3s var(----ease-fast-slow),
+								   transform 0.3s var(----ease-fast-slow)`;
 	export let type: 'button' | 'submit' | 'reset' = 'button';
 
 	let hasMounted = false;
@@ -45,6 +49,7 @@
 		--colour-text-active: {css(colourTextActive)};
 		--colour-text-disabled: {css(colourTextDisabled)};
 		--padding: {css(padding)};
+		--transition: {css(transition)};
 	"
 	class:left={$$slots.left}
 	class:right={$$slots.right}
@@ -97,6 +102,8 @@
 		border-radius: var(--roundness);
 		color: var(--colour-text);
 
+		transition: var(--transition);
+
 		& > .ripple {
 			position: absolute;
 			top: 0;
@@ -111,6 +118,8 @@
 
 			overflow: hidden;
 			overflow: clip;
+
+			transition: var(--transition);
 		}
 
 		& > .default.content {
@@ -146,11 +155,6 @@
 
 			outline: solid 1px var(--colour-background);
 			outline-offset: -1px;
-
-			--transition: background 0.2s var(----ease-fast-slow),
-				outline 0.3s var(----ease-slow-slow),
-				box-shadow 0.3s var(----ease-fast-slow),
-				transform 0.3s var(----ease-fast-slow);
 
 			transition: var(--transition);
 		}
