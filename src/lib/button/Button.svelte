@@ -16,7 +16,7 @@
 	export let width: TCss = '100%';
 	export let height: TCss = 56;
 	export let roundness: TCss = '----roundness';
-	export let shadow: TCss = '----shadow-md';
+	export let shadow: TCss = 'var(----shadow-inner-sm), var(----shadow-md)';
 	export let disabled = false;
 	export let padding: TCss = '16px max(var(--roundness), 14px)';
 	export let transition: TCss = `background 0.2s var(----ease-fast-slow),
@@ -151,7 +151,7 @@
 			border-radius: var(--roundness);
 
 			background: var(--colour-background);
-			box-shadow: var(----shadow-inner-sm), var(--shadow);
+			box-shadow: var(--shadow);
 
 			outline: solid 1px var(--colour-background);
 			outline-offset: -1px;
@@ -185,7 +185,7 @@
 				& > .default.background {
 					background: var(--colour-background-hover);
 					outline: solid 1px var(--colour-background-hover);
-					box-shadow: var(----shadow-inner-sm), var(--shadow);
+					box-shadow: var(--shadow);
 				}
 			}
 		}
@@ -209,7 +209,7 @@
 			& > .default.background {
 				background: var(--colour-background-disabled);
 				outline: solid 1px var(--colour-background-disabled);
-				box-shadow: var(----shadow-inner-sm), var(----shadow-md);
+				box-shadow: var(--shadow);
 			}
 		}
 	}
