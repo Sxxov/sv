@@ -2,12 +2,7 @@
 	import Button from '../button/Button.svelte';
 	import { css, type TCss } from '@sxxov/ut/css';
 	import Svg from '../svg/Svg.svelte';
-	import {
-		ic_check,
-		ic_close,
-		ic_radio_button_checked,
-		ic_radio_button_unchecked,
-	} from 'maic/two_tone';
+	import { ic_check, ic_close } from 'maic/two_tone';
 
 	export let colourBackground: TCss = '----colour-background-secondary';
 	export let colourBackgroundHover: TCss = '----colour-background-tertiary';
@@ -23,16 +18,14 @@
 	export let name: string;
 	export let label: string;
 	export let id: string | undefined = undefined;
-	export let active = false;
 	export let width: TCss = '100%';
-	export let widthTrack: TCss = 70;
-	export let widthKnob: TCss = 42;
+	export let widthTrack: TCss = 56;
+	export let widthKnob: TCss = 35;
 	export let height: TCss = 112;
-	export let heightTrack: TCss = 42;
-	export let heightKnob: TCss = 42;
+	export let heightTrack: TCss = 35;
+	export let heightKnob: TCss = 35;
 	export let roundness: TCss = '----roundness';
-
-	let checked = false;
+	export let checked = false;
 
 	$: id ??= `toggle--${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 </script>
@@ -110,7 +103,7 @@
 		border-radius: var(----roundness);
 
 		padding-top: 56px;
-		padding-left: 10.5px;
+		padding-left: 28px;
 		box-sizing: border-box;
 
 		--transition: background 0.2s var(----ease-fast-slow),
