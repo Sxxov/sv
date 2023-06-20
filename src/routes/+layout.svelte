@@ -64,7 +64,96 @@
 			inset 0 0 0 0 rgb(241 245 249 / 5%);
 	}
 
-	:root {
+	:global(:root) {
 		background: var(----colour-background-primary);
+	}
+
+	:global(h1) {
+		color: var(----colour-accent-primary);
+		font-family: var(----font-family-display);
+		font-weight: 100;
+
+		font-size: 4rem;
+		margin-bottom: 0.7em;
+		line-height: 0.8;
+
+		letter-spacing: -0.04em;
+	}
+
+	:global(h2) {
+		color: var(----colour-accent-primary);
+		font-family: var(----font-family-display);
+		font-weight: 300;
+
+		font-size: 3rem;
+		margin-bottom: 0.7em;
+		line-height: 0.8;
+	}
+
+	:global(h3) {
+		color: var(----colour-accent-secondary);
+		text-stroke: 0.5px var(----colour-accent-primary);
+		-webkit-text-stroke: 0.5px var(----colour-accent-primary);
+		font-family: var(----font-family-display);
+		font-weight: 300;
+
+		font-size: 2.26rem;
+		margin-bottom: 0.7em;
+		line-height: 0.8;
+	}
+
+	:global(h4) {
+		color: var(----colour-text-primary);
+		font-family: var(----font-family-display);
+		font-weight: 300;
+
+		font-size: 2.26rem;
+		margin-bottom: 0.7em;
+		line-height: 0.8;
+	}
+
+	:global(h5) {
+		color: var(----colour-text-primary);
+		font-family: var(----font-family-sans);
+		font-weight: 700;
+		text-transform: uppercase;
+
+		font-size: 1.6rem;
+		margin-bottom: 0.7em;
+		line-height: 1;
+	}
+
+	:global(h6) {
+		color: var(----colour-text-primary);
+		font-family: var(----font-family-sans);
+		font-weight: 500;
+		text-transform: uppercase;
+
+		font-size: 1.6rem;
+		margin-bottom: 0.7em;
+		line-height: 1;
+	}
+
+	:global(p, input, textarea, label, button) {
+		color: var(----colour-text-primary);
+		font-family: var(----font-family-sans);
+	}
+
+	:global(input, textarea, label, button) {
+		font-size: 1em;
+	}
+
+	:global(hr) {
+		width: 100%;
+		border: 0;
+		border-top: 1px solid var(----colour-text-primary);
+		margin-block-start: 0.5em;
+		margin-block-end: 0.5em;
+		opacity: 0.3;
+	}
+
+	:global(a:any-link) {
+		color: var(----colour-accent-primary);
+		text-underline-offset: 0.2em;
 	}
 </style>
