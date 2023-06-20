@@ -101,6 +101,7 @@
 
 		border-radius: var(--roundness);
 		color: var(--colour-text);
+		fill: var(--colour-text);
 
 		transition: var(--transition);
 

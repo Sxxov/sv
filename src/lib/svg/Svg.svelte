@@ -5,7 +5,7 @@
 	export let height: TCss = '16px';
 	export let width: TCss = '24px';
 	export let svg: TSvgString;
-	export let colour: TCss = '----colour-text-primary';
+	export let colour: TCss = 'currentColor';
 </script>
 
 <div
