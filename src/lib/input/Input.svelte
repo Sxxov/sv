@@ -65,6 +65,7 @@
 		placeholder={placeholder || ' '}
 		{autocomplete}
 		{value}
+		{name}
 		bind:this={input}
 		on:input
 		on:input={(e) => {
