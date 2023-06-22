@@ -210,7 +210,7 @@
 			}
 
 			& > input {
-				padding-left: calc(28px + 24px + 7px);
+				padding-left: 56px;
 			}
 		}
 
@@ -223,7 +223,7 @@
 			}
 
 			& > input {
-				padding-right: calc(28px + 24px + 7px);
+				padding-right: 56px;
 			}
 		}
 	}
