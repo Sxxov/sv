@@ -27,8 +27,7 @@
 		pointer-events: none;
 
 		fill: var(--colour-svg);
-
-		transition: fill 0.2s var(----ease-fast-slow);
+		color: var(--colour-svg);
 
 		& > :global(svg) {
 			display: block;
