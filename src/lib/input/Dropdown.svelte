@@ -21,7 +21,7 @@
 	export let heightInput: TCss = '112px';
 	export let heightMaxItems: TCss = '192px';
 	export let name: string;
-	export let label: string;
+	export let label = '';
 	export let items: T[] = [];
 	export let selectedItemId: string | undefined = undefined;
 	export let active = false;

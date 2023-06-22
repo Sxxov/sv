@@ -5,8 +5,6 @@
 	import { ic_clear } from 'maic/two_tone';
 	import { ButtonVariants } from '../button/ButtonVariants';
 
-	export let width: TCss = '100%';
-	export let height: TCss = '112px';
 	export let colourBackground: TCss = '----colour-background-secondary';
 	export let colourBackgroundHover: TCss = '----colour-background-tertiary';
 	export let colourBackgroundFocus: TCss = '----colour-background-primary';
@@ -19,7 +17,9 @@
 	export let colourLabelValued: TCss = '----colour-accent-primary';
 	export let colourLabelDisabled: TCss = '----colour-text-disabled';
 	export let name: string;
-	export let label: string;
+	export let label = '';
+	export let width: TCss = '100%';
+	export let height: TCss = label ? '112px' : '56px';
 	export let id: string | undefined = undefined;
 	export let placeholder = '';
 	export let value = '';
@@ -49,6 +49,8 @@
 		--colour-label: {css(colourLabel)};
 		--colour-label-valued: {css(colourLabelValued)};
 		--colour-label-disabled: {css(colourLabelDisabled)};
+		--top-input: {css(label ? 42 : 0)};
+		--top-slot: {css(label ? 56 : 0)};
 	"
 	class:left={$$slots.left}
 	class:right={$$slots.right || true}
@@ -102,15 +104,17 @@
 			>
 		</slot>
 	</div>
-	<label for={id}>
-		<slot
-			name="label-left"
-			{value}
-		/>{label}<slot
-			name="label-right"
-			{value}
-		/>
-	</label>
+	{#if label || $$slots['label-left'] || $$slots['label-right']}
+		<label for={id}>
+			<slot
+				name="label-left"
+				{value}
+			/>{label}<slot
+				name="label-right"
+				{value}
+			/>
+		</label>
+	{/if}
 </div>
 
 <style lang="postcss">
@@ -159,7 +163,7 @@
 			font-family: var(----font-family-sans);
 
 			padding: 0 max(var(----roundness), 7px);
-			padding-top: 42px;
+			padding-top: var(--top-input);
 			box-sizing: border-box;
 
 			border-radius: var(----roundness);
@@ -200,7 +204,7 @@
 		&.left {
 			& > .left {
 				position: absolute;
-				top: calc(56px + 28px);
+				top: calc(var(--top-slot) + 28px);
 				left: 0;
 				transform: translateY(-50%);
 			}
@@ -213,7 +217,7 @@
 		&.right {
 			& > .right {
 				position: absolute;
-				top: calc(56px + 28px);
+				top: calc(var(--top-slot) + 28px);
 				right: 0;
 				transform: translateY(-50%);
 			}

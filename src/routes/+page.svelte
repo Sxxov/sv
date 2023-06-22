@@ -13,6 +13,10 @@
 		name="a"
 		label="a"
 	/>
+	<Input
+		name="b"
+		label=""
+	/>
 	<Button {...ButtonVariants.FabRegularPrimary}><Svg svg={ic_check} /></Button
 	>
 	<Dropdown
