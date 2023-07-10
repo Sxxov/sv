@@ -24,12 +24,17 @@ export const ButtonVariants = {
 		colourTextHover: '----colour-text-primary',
 	},
 	Fab: {
-		Regular: {
+		Lg: {
+			width: '112px',
+			height: '112px',
+			padding: '32px',
+		},
+		Md: {
 			width: '56px',
 			height: '56px',
 			padding: '16px',
 		},
-		Small: {
+		Sm: {
 			width: '28px',
 			height: '28px',
 			padding: '2px',
