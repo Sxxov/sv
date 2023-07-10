@@ -349,7 +349,7 @@ module.exports = {
 		svelte: {
 			compileOptions: {
 				postcss: {
-					configFilePath: './path/to/my/postcss.config.js',
+					configFilePath: './postcss.config.js',
 				},
 			},
 		},
