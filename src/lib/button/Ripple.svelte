@@ -2,12 +2,22 @@
 	context="module"
 	lang="ts"
 >
+	/** The ID of the gradient inside the SVG <def> used for the ripple effect. */
 	const GRADIENT_ID = 'ripple--gradient';
 
+	/**
+	 * The number of instances of this component currently mounted. Used to
+	 * determine if the <defs> should be mounted.
+	 */
 	let instanceCount = new Store(0);
 </script>
 
 <script lang="ts">
+	/**
+	 * A surface that generates ripples when a `mousedown` or `touchdown` event
+	 * is received.
+	 */
+
 	import { Composition, Tween } from '@sxxov/ut/animation';
 	import { bezierExpoOut } from '@sxxov/ut/bezier/beziers';
 	import { css, type TCss } from '@sxxov/ut/css';
@@ -19,29 +29,49 @@
 	import Rr from '../functional/Rr.svelte';
 	import { whenResize } from '../ut/use/whenResize';
 
+	/** The width of the ripple surface. */
 	export let width: TCss = '100%';
+	/** The height of the ripple surface. */
 	export let height: TCss = '100%';
+	/** The minimum size of each ripple. */
 	export let sizeMin = 560;
+	/** The maximum size of each ripple. */
 	export let sizeMax = Infinity;
+	/** The minimum opacity of each ripple. */
 	export let opacityIn = 0.2;
+	/** The maximum opacity of each ripple. */
 	export let opacityOut = 0;
+	/** The minimum duration of each ripple. */
 	export let durationMin = 0;
+	/** The maximum duration of each ripple. */
 	export let durationMax = 3000;
 
+	/** The index of the current instance of this component. */
 	let instanceIndex = 0;
+	/** Backing data for each ripple. */
 	let rippleData: {
 		point: IPoint;
 		tweenSize: Tween;
 		tweenOpacity: Tween;
 	}[] = [];
+	/** Height of the ripple surface */
 	let svgWidth = 0;
+	/** Width of the ripple surface */
 	let svgHeight = 0;
 
+	/**
+	 * The size of each ripple. This is calculated as the hypotenuse of the
+	 * ripple surface.
+	 */
 	$: size = clamp(
 		Math.hypot(svgWidth / 2, svgHeight / 2) * 800,
 		sizeMin,
 		sizeMax,
 	);
+	/**
+	 * The duration of each ripple. This is calculated depending on the size of
+	 * the ripple, so that they seem consistent in speed.
+	 */
 	$: duration = clamp(size / 2, durationMin, durationMax);
 
 	onMount(() => {
@@ -68,12 +98,17 @@
 		if (typeof TouchEvent !== 'undefined' && event instanceof TouchEvent)
 			isTouching = true;
 
+		/** The position of the cursor/touch relative to the ripple surface. */
 		const { x: eventX, y: eventY } = resolveEventClientPoint(event);
+		/** The position of the ripple surface relative to the document. */
 		const { x: elemX, y: elemY } = (
 			event.currentTarget as HTMLElement
 		).getBoundingClientRect();
+		/** The position of the ripple relative to the ripple surface. */
 		const [rippleX, rippleY] = [eventX - elemX, eventY - elemY];
 
+		// If the event is a mouse event & the user is touching the screen, it
+		// means it's a virtual event & should be ignored.
 		if (
 			typeof MouseEvent !== 'undefined' &&
 			event instanceof MouseEvent &&
@@ -81,6 +116,7 @@
 		)
 			return;
 
+		// Setup the animation for the ripple.
 		const tweenSize = new Tween(20, size, duration);
 		const tweenOpacity = new Tween(
 			opacityIn,
@@ -108,22 +144,26 @@
 		])
 			.play()
 			.then(() => {
+				// Remove the ripple from the list of ripples.
 				rippleData.splice(rippleData.indexOf(rippleDatum), 1);
 				rippleData = rippleData;
 			});
 
+		// Add the ripple to the list of ripples.
 		rippleData.push(rippleDatum);
 		rippleData = rippleData;
 	};
 
 	const onUp = (event: MouseEvent | TouchEvent) => {
+		// If the event is a mouse event & the user is touching the screen, it
+		// means it's a virtual event & should be ignored.
 		if (typeof TouchEvent !== 'undefined' && event instanceof TouchEvent)
 			isTouching = false;
 	};
 </script>
 
 <svg
-	class="component"
+	class="ripple"
 	style="
 		--width: {css(width)};
 		--height: {css(height)};
@@ -133,10 +173,16 @@
 	on:touchend={onUp}
 	on:mouseup={onUp}
 	use:whenResize={({ width, height }) => {
+		// Propagate the size of the ripple surface.
 		svgWidth = width;
 		svgHeight = height;
 	}}
+	role="none"
 >
+	<!--
+		We only need to define the gradient once, so we only do it
+		if this is the first instance of the component mounted.
+	-->
 	{#if instanceIndex === $instanceCount - 1}
 		<defs>
 			<radialGradient id={GRADIENT_ID}>
@@ -159,7 +205,14 @@
 			</radialGradient>
 		</defs>
 	{/if}
+	<!--
+		Loop through the ripple back data and render the ripples.
+
+		Use a keyed each loop so ripples that already finished their
+		animation are removed from the DOM without affecting the others.
+	-->
 	{#each rippleData as { point: { x, y }, tweenSize, tweenOpacity }, i (i)}
+		<!-- Expose the store data as slot variables using <Rr> -->
 		<Rr
 			rr={{
 				tweenSize,
@@ -179,7 +232,7 @@
 </svg>
 
 <style lang="postcss">
-	svg {
+	.ripple {
 		width: 100%;
 		height: 100%;
 
