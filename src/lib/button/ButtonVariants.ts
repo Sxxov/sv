@@ -40,4 +40,21 @@ export const ButtonVariants = {
 			padding: '2px',
 		},
 	},
+	Shadow: {
+		Xl: {
+			shadow: 'var(----shadow-inner-sm), var(----shadow-xl)',
+		},
+		Lg: {
+			shadow: 'var(----shadow-inner-sm), var(----shadow-lg)',
+		},
+		Md: {
+			shadow: 'var(----shadow-inner-sm), var(----shadow-md)',
+		},
+		Sm: {
+			shadow: 'var(----shadow-inner-sm), var(----shadow-sm)',
+		},
+		None: {
+			shadow: 'var(----shadow-inner-none), var(----shadow-none)',
+		},
+	},
 } as const satisfies ILeaf<Button['$$prop_def']>;
