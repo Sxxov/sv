@@ -1,8 +1,5 @@
+import type { TVariants } from '../common/TVariants';
 import type Button from './Button.svelte';
-
-interface ILeaf<T> {
-	[n: string]: T | ILeaf<T>;
-}
 
 export const ButtonVariants = {
 	Primary: {
@@ -57,4 +54,4 @@ export const ButtonVariants = {
 			shadow: 'var(----shadow-inner-none), var(----shadow-none)',
 		},
 	},
-} as const satisfies ILeaf<Button['$$prop_def']>;
+} as const satisfies TVariants<Button>;
