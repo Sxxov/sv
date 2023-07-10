@@ -58,7 +58,12 @@
 
 	<slot name="content">
 		<div class="default content">
-			<slot name="left" /><slot /><slot name="right"
+			<slot name="left"
+				>{#if $$slots.right}<Spacer
+						width={24}
+						height={16}
+					/>{/if}</slot
+			><slot /><slot name="right"
 				>{#if $$slots.left}<Spacer
 						width={24}
 						height={16}
@@ -125,6 +130,8 @@
 			text-align: center;
 
 			user-select: none;
+
+			gap: 7px;
 		}
 
 		&:not(.left):not(.right) > .default.content {
