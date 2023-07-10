@@ -154,6 +154,10 @@
 			"types": "./dist/common/enums/index.d.ts",
 			"import": "./dist/common/enums/index.js"
 		},
+		"./common/types": {
+			"types": "./dist/common/types/index.d.ts",
+			"import": "./dist/common/types/index.js"
+		},
 		"./button": {
 			"types": "./dist/button/index.d.ts",
 			"import": "./dist/button/index.js",

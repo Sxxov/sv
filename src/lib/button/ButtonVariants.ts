@@ -1,4 +1,4 @@
-import type { TVariants } from '../common/TVariants';
+import type { TVariants } from '../common/types/TVariants';
 import type Button from './Button.svelte';
 
 export const ButtonVariants = {
