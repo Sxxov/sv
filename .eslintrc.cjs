@@ -263,12 +263,21 @@ module.exports = {
 	overrides: [
 		{
 			files: ['**/*.svelte'],
-			processor: 'svelte3/svelte3',
+			parser: 'svelte-eslint-parser',
+			parserOptions: {
+				parser: {
+					// Specify a parser for each lang.
+					ts: '@typescript-eslint/parser',
+					js: 'espree',
+					typescript: '@typescript-eslint/parser',
+				},
+			},
 			extends: [
 				'xo',
 				'xo-typescript',
 				'plugin:prettier/recommended',
 				'plugin:@typescript-eslint/recommended-requiring-type-checking',
+				'plugin:svelte/recommended',
 			],
 			rules: {
 				// TS doesn't do too well in svelte files
@@ -326,7 +335,7 @@ module.exports = {
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
-		ecmaVersion: 12,
+		ecmaVersion: 'latest',
 		tsconfigRootDir: __dirname,
 		project: ['./tsconfig.json'],
 		extraFileExtensions: ['.svelte'],
@@ -335,9 +344,15 @@ module.exports = {
 		node: false,
 		browser: true,
 	},
-	plugins: ['svelte3', '@typescript-eslint', 'only-warn'],
+	plugins: ['@typescript-eslint', 'only-warn'],
 	settings: {
-		'svelte3/typescript': true,
+		svelte: {
+			compileOptions: {
+				postcss: {
+					configFilePath: './path/to/my/postcss.config.js',
+				},
+			},
+		},
 	},
 	rules: CommonOverrideRules,
 };
