@@ -17,6 +17,12 @@ export const ButtonVariants = {
 		colourText: '----colour-text-primary',
 		colourTextHover: '----colour-text-primary',
 	},
+	Transparent: {
+		colourBackground: '----colour-background-transparent',
+		colourBackgroundHover: '----colour-background-secondary',
+		colourText: '----colour-text-primary',
+		colourTextHover: '----colour-text-primary',
+	},
 	Fab: {
 		Regular: {
 			width: '56px',
