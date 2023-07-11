@@ -82,24 +82,27 @@
 		width: var(--width);
 
 		overflow: hidden;
-	}
 
-	.content {
-		opacity: 1;
+		& > .content {
+			height: 100%;
+			width: 100%;
 
-		transition: opacity 0.3s var(----ease-slow-slow);
+			opacity: 1;
 
-		&.override :global(*) {
-			fill: var(--colour-override);
-			stroke: var(--colour-override);
-		}
+			transition: opacity 0.3s var(----ease-slow-slow);
 
-		&.loading {
-			opacity: 0;
-		}
+			&.override :global(*) {
+				fill: var(--colour-override);
+				stroke: var(--colour-override);
+			}
 
-		& > :global(svg) {
-			display: block;
+			&.loading {
+				opacity: 0;
+			}
+
+			& > :global(svg) {
+				display: block;
+			}
 		}
 	}
 </style>
