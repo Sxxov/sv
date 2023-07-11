@@ -4,6 +4,7 @@
 		AnimationConfig,
 		AnimationDirection,
 		AnimationItem,
+		LottiePlayer,
 	} from 'lottie-web';
 	import { onMount } from 'svelte';
 
@@ -19,7 +20,7 @@
 	export let colourOverride: TCss = '';
 
 	let animation: AnimationItem | undefined;
-	let contentDiv: HTMLDivElement;
+	let contentDiv: HTMLDivElement | undefined;
 
 	$: animation?.goToAndStop(frame, true);
 	$: animation?.setDirection(direction);
@@ -27,12 +28,16 @@
 	onMount(async () => {
 		const { default: lottie } = await import('lottie-web');
 
+		load(lottie);
+	});
+
+	const load = (lottie: LottiePlayer) => {
 		const pending = lottie.loadAnimation({
 			animationData,
 			autoplay: true,
 			loop: true,
 			...options,
-			container: contentDiv,
+			container: contentDiv!,
 		});
 
 		const onDomLoaded = () => {
@@ -47,7 +52,7 @@
 			pending.removeEventListener('DOMLoaded', onDomLoaded);
 			pending.destroy();
 		};
-	});
+	};
 </script>
 
 <div
@@ -60,9 +65,10 @@
 >
 	<div
 		class="content"
+		class:override={colourOverride}
 		bind:this={contentDiv}
 		style="
-			--colour-override: {css(colourOverride)};
+			{colourOverride ? `--colour-override: ${css(colourOverride)};` : ''}
 		"
 		class:loading={!animation}
 	>
@@ -83,7 +89,7 @@
 
 		transition: opacity 0.3s var(----ease-slow-slow);
 
-		& :global(*) {
+		&.override :global(*) {
 			fill: var(--colour-override);
 			stroke: var(--colour-override);
 		}
