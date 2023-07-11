@@ -1,10 +1,9 @@
 import { Store } from '@sxxov/ut/store';
 
-/**
- * A lazily listening store for any scroll events that can be captured from the
- * window
- */
-export const scrollAny = new (class extends Store<{
+// use intermediate class instead of anonymous class
+// to ensure d.ts gets generated correctly
+// https://github.com/microsoft/TypeScript/issues/42738
+class ScrollAnyStore extends Store<{
 	x: number;
 	y: number;
 }> {
@@ -59,7 +58,13 @@ export const scrollAny = new (class extends Store<{
 				window.removeEventListener('scroll', onScroll);
 		};
 	}
-})({
+}
+
+/**
+ * A lazily listening store for any scroll events that can be captured from the
+ * window
+ */
+export const scrollAny = new ScrollAnyStore({
 	x: 0,
 	y: 0,
 });
