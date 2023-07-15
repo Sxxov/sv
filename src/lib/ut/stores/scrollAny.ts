@@ -1,4 +1,4 @@
-import { Store } from '@sxxov/ut/store';
+import { Store, type Supply } from '@sxxov/ut/store';
 
 // use intermediate class instead of anonymous class
 // to ensure d.ts gets generated correctly
@@ -61,10 +61,13 @@ class ScrollAnyStore extends Store<{
 }
 
 /**
- * A lazily listening store for any scroll events that can be captured from the
+ * A lazily listening supply for any scroll events that can be captured from the
  * window
  */
-export const scrollAny = new ScrollAnyStore({
+export const scrollAny: Supply<{
+	x: number;
+	y: number;
+}> = new ScrollAnyStore({
 	x: 0,
 	y: 0,
-});
+}).supply;
