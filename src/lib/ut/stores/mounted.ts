@@ -1,4 +1,4 @@
-import { Store } from '@sxxov/ut/store';
+import { Store, type Supply } from '@sxxov/ut/store';
 import { onMount, getAllContexts } from 'svelte';
 
 class MountedStore extends Store<boolean> {
@@ -69,4 +69,8 @@ class MountedStore extends Store<boolean> {
 	}
 }
 
-export const mounted = new MountedStore().supply;
+/**
+ * A lazily listening supply that returns `true` if the current component is
+ * mounted.
+ */
+export const mounted: Supply<boolean> = new MountedStore().supply;
