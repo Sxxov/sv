@@ -1,6 +1,6 @@
-import type { SvelteComponent } from 'svelte';
+import type { SvelteComponent, ComponentProps } from 'svelte';
 
-export type TVariants<T extends SvelteComponent> = TLeaf<T['$$prop_def']>;
+export type TVariants<T extends SvelteComponent> = TLeaf<ComponentProps<T>>;
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 type TLeaf<T> = {
