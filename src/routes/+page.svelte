@@ -17,11 +17,27 @@
 		name="b"
 		label=""
 	/>
-	<Button {...ButtonVariants.FabRegularPrimary}><Svg svg={ic_check} /></Button
-	>
+	<Button {...ButtonVariants.Fab.Md}><Svg svg={ic_check} /></Button>
 	<Dropdown
 		name="thing"
-		label="thing"
+		items={[
+			{
+				icon: ic_check,
+				id: 'thing',
+				terms: ['thing', 'thing', 'thing'],
+				title: 'thing',
+			},
+			{
+				icon: ic_check,
+				id: 'thing2',
+				terms: ['thang', 'thing', 'thing', '2'],
+				title: 'thang',
+			},
+		]}
+	/>
+	<Dropdown
+		label="labelled"
+		name="labelled-thing"
 		items={[
 			{
 				icon: ic_check,

@@ -6,7 +6,7 @@
 		----font-family-sans: 'Space Grotesk', 'Inter', 'Helvetica', sans-serif;
 
 		----padding: clamp(8px, 8%, 28px);
-		----roundness: 28px;
+		----roundness: 14px;
 
 		----ease-fast-slow: cubic-bezier(0.075, 0.82, 0.165, 1);
 		----ease-slow-slow: cubic-bezier(0.77, 0, 0.175, 1);
