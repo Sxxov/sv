@@ -54,6 +54,13 @@
 	style="
 		--height-input: {css(heightInput)};
 	"
+	role="combobox"
+	aria-haspopup="listbox"
+	aria-expanded={active}
+	aria-owns="listbox"
+	aria-controls="listbox"
+	aria-activedescendant={selectedItemId}
+	tabindex="0"
 	on:focusin={(e) => {
 		if (e.target instanceof HTMLInputElement)
 			e.target.setSelectionRange(0, e.target.value.length);
@@ -99,7 +106,8 @@
 			slot="right"
 		>
 			<Button
-				{...ButtonVariants.FabRegularSecondary}
+				{...ButtonVariants.Secondary}
+				{...ButtonVariants.Fab.Md}
 				colourBackground="transparent"
 				shadow="----shadow-none"
 				on:mousedown={(e) => {
