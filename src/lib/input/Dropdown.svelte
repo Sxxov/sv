@@ -10,19 +10,19 @@
 	import Svg from '../svg/Svg.svelte';
 	import Input from './Input.svelte';
 
-	type T = $$Generic<{
+	interface IItem {
 		id: string;
 		icon: TSvgString;
 		title: string;
 		terms: readonly string[];
-	}>;
+	}
 
 	export let width: TCss = '100%';
 	export let label = '';
 	export let heightInput: TCss = label ? '112px' : '56px';
 	export let heightMaxItems: TCss = '192px';
 	export let name: string;
-	export let items: [T, ...T[]];
+	export let items: [IItem, ...IItem[]];
 	export let selectedItemId = items[0].id;
 	export let active = false;
 
