@@ -159,8 +159,7 @@
 </script>
 
 <div
-	_="<VirtualList>"
-	class="component"
+	class="virtual-list"
 	style="--height: {css(height)};"
 	bind:this={componentDiv}
 	on:scroll={onScroll}
@@ -193,22 +192,22 @@
 </div>
 
 <style>
-	.component {
+	.virtual-list {
 		position: relative;
 
 		height: var(--height);
 
 		overflow-y: auto;
 		-webkit-overflow-scrolling: touch;
-	}
 
-	.content {
-		padding-top: var(--height-gap-top);
-		padding-bottom: var(--height-gap-bottom);
-	}
+		& > .content {
+			padding-top: var(--height-gap-top);
+			padding-bottom: var(--height-gap-bottom);
 
-	.row {
-		overflow: hidden;
-		overflow: clip;
+			& > .row {
+				overflow: hidden;
+				overflow: clip;
+			}
+		}
 	}
 </style>

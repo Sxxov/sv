@@ -31,7 +31,7 @@
 </script>
 
 <label
-	class="component"
+	class="toggle"
 	style="
 		--height: {css(height)};
 		--width: {css(width)};
@@ -89,7 +89,7 @@
 </label>
 
 <style lang="postcss">
-	.component {
+	.toggle {
 		display: block;
 		position: relative;
 

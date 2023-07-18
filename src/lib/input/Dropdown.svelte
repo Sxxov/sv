@@ -49,7 +49,7 @@
 </script>
 
 <div
-	class="component"
+	class="dropdown"
 	class:active
 	style="
 		--height-input: {css(heightInput)};
@@ -173,7 +173,7 @@
 </div>
 
 <style lang="postcss">
-	.component {
+	.dropdown {
 		height: var(--height-input);
 
 		& .input.left {

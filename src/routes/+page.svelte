@@ -8,7 +8,7 @@
 	import { Dropdown } from '../lib/input';
 </script>
 
-<div class="component">
+<div class="home">
 	<Input
 		name="a"
 		label="a"

@@ -9,8 +9,7 @@
 </script>
 
 <div
-	_="<LineLoader>"
-	class="component"
+	class="loader-line"
 	style="
 		--width: {css(width)};
 		--weight-stroke: {css(strokeWeight)};
@@ -30,7 +29,7 @@
 </div>
 
 <style lang="postcss">
-	.component {
+	.loader-line {
 		position: relative;
 
 		height: auto;

@@ -6,7 +6,7 @@
 </script>
 
 <div
-	class="component"
+	class="spacer"
 	style="
 		--width: {css(width)};
 		--height: {css(height)};
@@ -14,7 +14,7 @@
 />
 
 <style>
-	.component {
+	.spacer {
 		width: var(--width);
 		height: var(--height);
 

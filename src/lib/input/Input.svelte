@@ -34,7 +34,7 @@
 </script>
 
 <div
-	class="component"
+	class="input"
 	style="
 		--height: {css(height)};
 		--width: {css(width)};
@@ -119,7 +119,7 @@
 </div>
 
 <style lang="postcss">
-	.component {
+	.input {
 		position: relative;
 
 		width: var(--width);

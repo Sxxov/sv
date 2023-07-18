@@ -44,8 +44,7 @@
 </script>
 
 <div
-	_="<Masonry>"
-	class="component"
+	class="masonry"
 	style="
 		--width: {css(width)};
 		--width-column: {css(columnWidth)};
@@ -68,7 +67,7 @@
 </div>
 
 <style lang="postcss">
-	.component {
+	.masonry {
 		display: grid;
 		justify-items: start;
 		align-items: start;

@@ -61,10 +61,7 @@
 	}
 </script>
 
-<div
-	_="<Toaster>"
-	class="component"
->
+<div class="toaster">
 	{#each $toasts as toast}
 		<Spacer height={8} />
 		<div
@@ -82,7 +79,8 @@
 				{toast.text}
 			</Hint>
 			<Button
-				{...ButtonVariants.FabSmallSecondary}
+				{...ButtonVariants.Secondary}
+				{...ButtonVariants.Fab.Sm}
 				colourBackground="transparent"
 				colourBackgroundHover="#fff2"
 				on:click={() => dismiss(toast.uid)}
@@ -94,7 +92,7 @@
 </div>
 
 <style lang="postcss">
-	.component {
+	.toaster {
 		position: fixed;
 
 		right: 0;

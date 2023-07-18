@@ -11,7 +11,7 @@
 </script>
 
 <div
-	class="component"
+	class="card"
 	class:clickable
 	style="
 		--height: {css(height)};
@@ -28,7 +28,7 @@
 </div>
 
 <style lang="postcss">
-	.component {
+	.card {
 		height: var(--height);
 		width: var(--width);
 

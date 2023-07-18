@@ -166,8 +166,7 @@
 </script>
 
 <div
-	_="<BottomSheet>"
-	class="component"
+	class="bottom-sheet"
 	style="
 		--colour-background: {css(backgroundColour)};
 		--height-idle: {css(idleHeight)};
@@ -177,6 +176,14 @@
 		currHeight,
 	)} + {deltaY}px), var(--height-full));
 	"
+	role="combobox"
+	aria-haspopup="listbox"
+	aria-expanded={Boolean(
+		state & BottomSheetStates.FULL || state & BottomSheetStates.PEEK,
+	)}
+	aria-owns="listbox"
+	aria-controls="listbox"
+	tabindex="0"
 	bind:this={componentDiv}
 	on:mousedown={onDragStart}
 	on:touchstart={onDragStart}
@@ -193,6 +200,7 @@
 			style="
 				--opacity: {opacity};
 			"
+			role="presentation"
 			on:click={() => {
 				state = BottomSheetStates.IDLE | BottomSheetStates.SETTLING;
 			}}
@@ -247,7 +255,7 @@
 </div>
 
 <style lang="postcss">
-	.component {
+	.bottom-sheet {
 		position: fixed;
 
 		height: 100%;

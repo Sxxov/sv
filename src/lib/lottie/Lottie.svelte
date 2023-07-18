@@ -56,8 +56,7 @@
 </script>
 
 <div
-	_="<Lottie>"
-	class="component"
+	class="lottie"
 	style="
 		--height: {css(height)};
 		--width: {css(width)};
@@ -77,7 +76,7 @@
 </div>
 
 <style lang="postcss">
-	.component {
+	.lottie {
 		height: var(--height);
 		width: var(--width);
 

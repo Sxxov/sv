@@ -9,18 +9,19 @@
 </script>
 
 <div
-	class="component"
+	class="svg"
 	style="
 		--colour-svg: {css(colour)};
 		--height-svg: {css(height)};
 		--width-svg: {css(width)};
 	"
 >
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	{@html svg}
 </div>
 
 <style lang="postcss">
-	.component {
+	.svg {
 		display: contents;
 
 		/* required to prevent bug in button, where it fires a mousedown but not a click, sometimes */

@@ -20,7 +20,10 @@
 </script>
 
 <div
-	class="component"
+	class="hint"
+	role="treeitem"
+	aria-selected="false"
+	tabindex="0"
 	on:click
 	on:keyup
 >
@@ -49,28 +52,30 @@
 </div>
 
 <style lang="postcss">
-	.content {
-		display: flex;
-		align-items: center;
+	.hint {
+		& > .content {
+			display: flex;
+			align-items: center;
 
-		gap: 12px;
+			gap: 12px;
 
-		overflow: hidden;
+			overflow: hidden;
 
-		opacity: 1;
-		min-height: calc(1rem + 2em);
-
-		transition: 0.2s var(----ease-slow-slow);
-
-		&.none {
-			opacity: 0;
-			height: 0;
-		}
-
-		& > p {
-			color: var(--colour);
+			opacity: 1;
+			min-height: calc(1rem + 2em);
 
 			transition: 0.2s var(----ease-slow-slow);
+
+			&.none {
+				opacity: 0;
+				height: 0;
+			}
+
+			& > p {
+				color: var(--colour);
+
+				transition: 0.2s var(----ease-slow-slow);
+			}
 		}
 	}
 </style>

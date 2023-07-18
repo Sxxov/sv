@@ -17,8 +17,7 @@
 </script>
 
 <div
-	_="<CircleLoader>"
-	class="component"
+	class="loader-circle"
 	style="
 		--height: {css(height)};
 		--width: {css(width)};
@@ -60,7 +59,7 @@
 </div>
 
 <style lang="postcss">
-	.component {
+	.loader-circle {
 		position: relative;
 		height: var(--height);
 		width: var(--width);
