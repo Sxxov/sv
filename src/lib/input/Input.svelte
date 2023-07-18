@@ -92,7 +92,8 @@
 			{value}
 		>
 			<Button
-				{...ButtonVariants.FabRegularSecondary}
+				{...ButtonVariants.Fab.Md}
+				{...ButtonVariants.Secondary}
 				colourBackground="transparent"
 				shadow="----shadow-none"
 				on:click={() => {
@@ -162,7 +163,7 @@
 			font-size: 1em;
 			font-family: var(----font-family-sans);
 
-			padding: 0 max(var(----roundness), 7px);
+			padding: 0 max(var(----roundness), 28px);
 			padding-top: var(--top-input);
 			box-sizing: border-box;
 
@@ -204,7 +205,7 @@
 		&.left {
 			& > .left {
 				position: absolute;
-				top: calc(var(--top-slot) + 28px);
+				top: calc((100% + var(--top-input)) / 2);
 				left: 0;
 				transform: translateY(-50%);
 			}
@@ -217,7 +218,7 @@
 		&.right {
 			& > .right {
 				position: absolute;
-				top: calc(var(--top-slot) + 28px);
+				top: calc((100% + var(--top-input)) / 2);
 				right: 0;
 				transform: translateY(-50%);
 			}
