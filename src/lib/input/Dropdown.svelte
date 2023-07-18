@@ -18,12 +18,12 @@
 	}>;
 
 	export let width: TCss = '100%';
-	export let heightInput: TCss = '112px';
+	export let label = '';
+	export let heightInput: TCss = label ? '112px' : '56px';
 	export let heightMaxItems: TCss = '192px';
 	export let name: string;
-	export let label = '';
-	export let items: T[] = [];
-	export let selectedItemId: string | undefined = undefined;
+	export let items: [T, ...T[]];
+	export let selectedItemId = items[0].id;
 	export let active = false;
 
 	let value = '';
@@ -65,6 +65,7 @@
 		if (e.target instanceof HTMLInputElement)
 			e.target.setSelectionRange(0, e.target.value.length);
 
+		searchedItems = items;
 		active = true;
 	}}
 	on:focusout={() => {
@@ -143,7 +144,9 @@
 						}}
 					>
 						<Button
-							{...ButtonVariants.Secondary}
+							{...item.id === selectedItem?.id
+								? ButtonVariants.Primary
+								: ButtonVariants.Secondary}
 							shadow="----shadow-none"
 							on:mousedown={(e) => {
 								e.preventDefault();
@@ -157,13 +160,10 @@
 								slot="left"
 							>
 								<div class="icon">
-									<Svg
-										svg={item.icon}
-										colour="----colour-text-secondary"
-									/>
+									<Svg svg={item.icon} />
 								</div>
 							</div>
-							<div class="title"><p>{item.title}</p></div></Button
+							<div class="title">{item.title}</div></Button
 						>
 					</div>
 				</slot>
@@ -178,8 +178,12 @@
 
 		& .input.left {
 			& > .icon {
-				padding-left: 28px;
-				padding-bottom: 14px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				width: 56px;
+				height: 56px;
 			}
 		}
 
@@ -237,16 +241,11 @@
 					font-size: 16px;
 					line-height: 24px;
 					font-weight: 500;
-					color: var(----colour-text-primary);
 
 					width: 100%;
 					text-align: start;
 
 					margin-left: 7px;
-
-					& > p {
-						margin: 0;
-					}
 				}
 			}
 		}
