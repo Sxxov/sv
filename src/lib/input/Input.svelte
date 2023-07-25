@@ -4,6 +4,7 @@
 	import Svg from '../svg/Svg.svelte';
 	import { ic_clear } from 'maic/two_tone';
 	import { ButtonVariants } from '../button/ButtonVariants';
+	import { onMount } from 'svelte';
 
 	export let colourBackground: TCss = '----colour-background-secondary';
 	export let colourBackgroundHover: TCss = '----colour-background-tertiary';
@@ -19,18 +20,37 @@
 	export let name: string;
 	export let label = '';
 	export let width: TCss = '100%';
-	export let height: TCss = label ? '112px' : '56px';
 	export let id: string | undefined = undefined;
 	export let placeholder = '';
 	export let value = '';
 	export let autocomplete: HTMLInputElement['autocomplete'] = 'off';
 	export let type: HTMLInputElement['type'] = 'text';
 	export let active = false;
+	export let multiline = false;
+	export let height: TCss = label ? (multiline ? 'auto' : '112px') : '56px';
 
-	let input: HTMLInputElement | undefined;
+	let input: HTMLInputElement | HTMLTextAreaElement | undefined;
+	let scrollHeight = 112;
 
 	$: id ??= `input--${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 	$: active ? input?.focus() : input?.blur();
+	$: auto = multiline && css(height) === 'auto';
+
+	onMount(() => {
+		if (multiline) scrollHeight = input!.scrollHeight;
+	});
+
+	const onSynch = () => {
+		if (!input) return;
+
+		value = input.value;
+
+		if (auto) {
+			input.style.height = '0px';
+			scrollHeight = input.scrollHeight;
+			input.style.height = '';
+		}
+	};
 </script>
 
 <div
@@ -51,6 +71,9 @@
 		--colour-label-disabled: {css(colourLabelDisabled)};
 		--top-input: {css(label ? 42 : 0)};
 		--top-slot: {css(label ? 56 : 0)};
+		--roundness-input: {multiline
+		? 'var(----roundness) 0 var(----roundness) var(----roundness)'
+		: 'var(----roundness)'};
 	"
 	class:left={$$slots.left}
 	class:right={$$slots.right || true}
@@ -61,8 +84,10 @@
 			{value}
 		/>
 	</div>
-	<input
+	<svelte:element
+		this={multiline ? 'textarea' : 'input'}
 		{id}
+		class="target"
 		{type}
 		placeholder={placeholder || ' '}
 		{autocomplete}
@@ -70,39 +95,41 @@
 		{name}
 		bind:this={input}
 		on:input
-		on:input={(e) => {
-			value = e.currentTarget.value;
-		}}
+		on:input={onSynch}
 		on:change
-		on:change={(e) => {
-			value = e.currentTarget.value;
-		}}
+		on:change={onSynch}
 		on:focus
-		on:focus={(e) => {
+		on:focus={() => {
 			active = true;
 		}}
 		on:blur
 		on:blur={() => {
 			active = false;
 		}}
+		style="
+			--height-input: {auto ? css(scrollHeight) : '100%'};
+			--min-height-input: {css(label ? 112 : 56)};
+		"
 	/>
 	<div class="right">
 		<slot
 			name="right"
 			{value}
 		>
-			<Button
-				{...ButtonVariants.Fab.Md}
-				{...ButtonVariants.Secondary}
-				colourBackground="transparent"
-				shadow="----shadow-none"
-				on:click={() => {
-					if (input) {
-						input.value = '';
-						input.focus();
-					}
-				}}><Svg svg={ic_clear} /></Button
-			>
+			<div class="clear">
+				<Button
+					{...ButtonVariants.Fab.Md}
+					{...ButtonVariants.Secondary}
+					colourBackground="transparent"
+					shadow="----shadow-none"
+					on:click={() => {
+						if (input) {
+							input.value = '';
+							input.focus();
+						}
+					}}><Svg svg={ic_clear} /></Button
+				>
+			</div>
 		</slot>
 	</div>
 	{#if label || $$slots['label-left'] || $$slots['label-right']}
@@ -123,6 +150,7 @@
 		position: relative;
 
 		width: var(--width);
+		height: var(--height);
 
 		& > label {
 			position: absolute;
@@ -148,23 +176,27 @@
 			box-shadow: var(----shadow-inner-sm);
 		}
 
-		& > input:-webkit-autofill ~ label,
-		& > input:not(:placeholder-shown) ~ label {
+		& > .target:-webkit-autofill ~ label,
+		& > .target:not(:placeholder-shown) ~ label {
 			color: var(--colour-label-valued);
 		}
 
-		& > input {
+		& > .target {
 			display: block;
 
 			width: 100%;
-			height: var(--height);
+			height: var(--height-input);
+			min-height: var(--min-height-input);
 
 			color: var(--colour-text);
 			font-size: 1em;
 			font-family: var(----font-family-sans);
 
+			--padding-input-y: calc(((56px + 14px) - 1.28em) / 2);
+
 			padding: 0 max(var(----roundness), 28px);
-			padding-top: var(--top-input);
+			padding-bottom: var(--padding-input-y);
+			padding-top: calc(var(--top-input) + var(--padding-input-y));
 			box-sizing: border-box;
 
 			border-radius: var(----roundness);
@@ -175,6 +207,8 @@
 			outline: 1px solid var(--colour-background);
 			outline-offset: -1px;
 			box-shadow: var(----shadow-inner-sm), var(----shadow-sm);
+
+			resize: none;
 
 			--transition: background 0.2s var(----ease-fast-slow),
 				outline 0.3s var(----ease-slow-slow),
@@ -205,12 +239,20 @@
 		&.left {
 			& > .left {
 				position: absolute;
-				top: calc((100% + var(--top-input)) / 2);
+				top: 0;
 				left: 0;
-				transform: translateY(-50%);
+				padding-top: var(--top-slot);
+				box-sizing: border-box;
+				height: 100%;
+
+				pointer-events: none;
+
+				& > :global(*) {
+					pointer-events: auto;
+				}
 			}
 
-			& > input {
+			& > .target {
 				padding-left: 56px;
 			}
 		}
@@ -218,12 +260,26 @@
 		&.right {
 			& > .right {
 				position: absolute;
-				top: calc((100% + var(--top-input)) / 2);
+				top: 0;
 				right: 0;
-				transform: translateY(-50%);
+				padding-top: var(--top-slot);
+				box-sizing: border-box;
+				height: 100%;
+
+				pointer-events: none;
+
+				& > :global(*) {
+					pointer-events: auto;
+				}
+
+				& > .clear {
+					top: 100%;
+					transform: translateY(-100%);
+					position: relative;
+				}
 			}
 
-			& > input {
+			& > .target {
 				padding-right: 56px;
 			}
 		}

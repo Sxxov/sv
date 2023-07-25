@@ -17,6 +17,17 @@
 		name="b"
 		label=""
 	/>
+	<Input
+		name="c"
+		label="textarea"
+		multiline
+	/>
+	<Input
+		name="d"
+		label="textarea2"
+		multiline
+		height="auto"
+	/>
 	<Button {...ButtonVariants.Fab.Md}><Svg svg={ic_check} /></Button>
 	<Dropdown
 		name="thing"
