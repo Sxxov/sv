@@ -24,10 +24,24 @@
 	/>
 	<Input
 		name="d"
-		label="textarea2"
+		label="textarea auto"
 		multiline
 		height="auto"
 	/>
+	<Input
+		name="e"
+		label="textarea limited"
+		multiline
+		height="200px"
+	/>
+	<div style="min-height: 200px; max-height: 300px">
+		<Input
+			name="e"
+			label="textarea auto limited"
+			multiline
+			height="100%"
+		/>
+	</div>
 	<Button {...ButtonVariants.Fab.Md}><Svg svg={ic_check} /></Button>
 	<Dropdown
 		name="thing"

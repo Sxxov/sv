@@ -34,7 +34,6 @@
 
 	$: id ??= `input--${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 	$: active ? input?.focus() : input?.blur();
-	$: auto = multiline && css(height) === 'auto';
 
 	onMount(() => {
 		if (multiline) scrollHeight = input!.scrollHeight;
@@ -45,7 +44,7 @@
 
 		value = input.value;
 
-		if (auto) {
+		if (multiline) {
 			input.style.height = '0px';
 			scrollHeight = input.scrollHeight;
 			input.style.height = '';
@@ -107,8 +106,7 @@
 			active = false;
 		}}
 		style="
-			--height-input: {auto ? css(scrollHeight) : '100%'};
-			--min-height-input: {css(label ? 112 : 56)};
+			--height-input: {multiline ? css(scrollHeight) : '100%'};
 		"
 	/>
 	<div class="right">
@@ -149,8 +147,13 @@
 	.input {
 		position: relative;
 
+		display: flex;
+		flex-direction: column;
+
 		width: var(--width);
 		height: var(--height);
+		min-height: inherit;
+		max-height: inherit;
 
 		& > label {
 			position: absolute;
@@ -186,7 +189,10 @@
 
 			width: 100%;
 			height: var(--height-input);
-			min-height: var(--min-height-input);
+			min-height: 100%;
+			max-height: 100%;
+
+			flex-grow: 1;
 
 			color: var(--colour-text);
 			font-size: 1em;
