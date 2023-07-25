@@ -31,8 +31,10 @@
 
 	$: searchedItems = items.filter(
 		(item) =>
-			item.title.includes(value) ||
-			item.terms.some((v) => v.includes(value)),
+			item.title.toLowerCase().includes(value.toLowerCase()) ||
+			item.terms.some((v) =>
+				v.toLowerCase().includes(value.toLowerCase()),
+			),
 	);
 
 	$: selectedItem = items.find((item) => item.id === selectedItemId);
