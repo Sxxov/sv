@@ -94,11 +94,19 @@
 		<div
 			class="input left"
 			slot="left"
+			style="
+				--height-icon: {css(label ? 42 : 56)}
+			"
 		>
-			<div class="icon">
+			<div
+				class="icon"
+				class:option={!active}
+			>
 				<Svg
 					svg={active ? ic_search : selectedItem?.icon ?? ic_search}
-					colour="----colour-text-secondary"
+					colour={active
+						? '----colour-text-secondary'
+						: '----colour-text-primary'}
 				/>
 			</div>
 		</div>
@@ -183,7 +191,7 @@
 				justify-content: center;
 
 				width: 56px;
-				height: 56px;
+				height: var(--height-icon);
 			}
 		}
 
