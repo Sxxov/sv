@@ -1,6 +1,7 @@
 export const whenResize = (
 	node: Element,
 	callback: (rect: { width: number; height: number }) => void,
+	options: ResizeObserverOptions = {},
 ) => {
 	const observer = new ResizeObserver((entries) => {
 		for (const { contentBoxSize } of entries)
@@ -11,7 +12,7 @@ export const whenResize = (
 				});
 	});
 
-	observer.observe(node);
+	observer.observe(node, options);
 
 	return {
 		destroy() {
