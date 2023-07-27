@@ -1,4 +1,4 @@
-const generateWhenResize =
+export const generateWhenResize =
 	(options: ResizeObserverOptions) =>
 	(
 		node: Element,
