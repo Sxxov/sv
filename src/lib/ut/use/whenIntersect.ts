@@ -1,17 +1,3 @@
-export const whenIntersect = (
-	node: Element,
-	callback: (entry: IntersectionObserverEntry) => void,
-	options: IntersectionObserverInit = {},
-) => {
-	const observer = new IntersectionObserver((entries) => {
-		for (const entry of entries) callback(entry);
-	}, options);
+import { generateWhenIntersect } from './generateWhenIntersect';
 
-	observer.observe(node);
-
-	return {
-		destroy() {
-			observer.disconnect();
-		},
-	};
-};
+export const whenIntersect = generateWhenIntersect({});
