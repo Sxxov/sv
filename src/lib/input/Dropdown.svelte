@@ -85,12 +85,12 @@
 	}}
 >
 	<Input
-		{...inputProps}
 		{width}
 		height={heightInput}
 		{name}
 		{label}
 		placeholder="Search"
+		{...inputProps}
 		bind:active
 		bind:value
 		on:submit
