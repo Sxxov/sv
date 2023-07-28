@@ -197,7 +197,7 @@ const CommonOverrideRules = {
 			// Interface name should be prefixed with `I`.
 			selector: 'interface',
 			format: ['StrictPascalCase'],
-			prefix: ['I'],
+			prefix: ['I', '$$'],
 		},
 		{
 			// Type parameter name should either be `T` or a descriptive name.
@@ -208,7 +208,7 @@ const CommonOverrideRules = {
 		{
 			selector: 'typeAlias',
 			format: ['StrictPascalCase'],
-			prefix: ['T'],
+			prefix: ['T', '$$'],
 		},
 		// Allow these in non-camel-case when quoted.
 		{
