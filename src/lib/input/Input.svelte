@@ -155,6 +155,8 @@
 		min-height: inherit;
 		max-height: inherit;
 
+		text-align: inherit;
+
 		& > label {
 			position: absolute;
 
