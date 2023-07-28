@@ -155,8 +155,6 @@
 		min-height: inherit;
 		max-height: inherit;
 
-		text-align: inherit;
-
 		& > label {
 			position: absolute;
 
@@ -199,6 +197,7 @@
 			color: var(--colour-text);
 			font-size: 1em;
 			font-family: var(----font-family-sans);
+			text-align: inherit;
 
 			--padding-input-y: calc(((56px + 14px) - 1.28em) / 2);
 
