@@ -4,5 +4,6 @@ export { default as Hint } from './Hint.svelte';
 export * from './Hint.svelte';
 export { default as Input } from './Input.svelte';
 export * from './Input.svelte';
+export * from './InputVariants';
 export { default as Toggle } from './Toggle.svelte';
 export * from './Toggle.svelte';
