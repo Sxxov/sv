@@ -1,8 +1,8 @@
 import type { SvelteComponent, ComponentProps } from 'svelte';
 
-export type TVariants<T extends SvelteComponent> = TLeaf<ComponentProps<T>>;
+export type TVariants<T extends SvelteComponent> = TBranch<ComponentProps<T>>;
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-type TLeaf<T> = {
-	[n: string]: T | TLeaf<T>;
+type TBranch<T> = {
+	[n: string]: Partial<T> | TBranch<T>;
 };

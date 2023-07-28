@@ -15,6 +15,11 @@
 	export let height: TCss = 56;
 	export let roundness: TCss = '----roundness';
 	export let shadow: TCss = 'var(----shadow-inner-sm), var(----shadow-md)';
+	export let shadowHover: TCss =
+		'var(----shadow-inner-sm), var(----shadow-lg)';
+	export let shadowActive: TCss =
+		'var(----shadow-inner-md), var(----shadow-none)';
+	export let shadowDisabled: TCss = shadow;
 	export let disabled = false;
 	export let padding: TCss = '16px max(var(--roundness), 14px)';
 	export let transition: TCss = `background 0.2s var(----ease-fast-slow),
@@ -31,7 +36,6 @@
 		--width: {css(width)};
 		--height: {css(height)};
 		--roundness: {css(roundness)};
-		--shadow: {css(shadow)};
 		--colour-background: {css(colourBackground)};
 		--colour-background-hover: {css(colourBackgroundHover)};
 		--colour-background-active: {css(colourBackgroundActive)};
@@ -40,6 +44,10 @@
 		--colour-text-hover: {css(colourTextHover)};
 		--colour-text-active: {css(colourTextActive)};
 		--colour-text-disabled: {css(colourTextDisabled)};
+		--shadow: {css(shadow)};
+		--shadow-hover: {css(shadowHover)};
+		--shadow-active: {css(shadowActive)};
+		--shadow-disabled: {css(shadowDisabled)};
 		--padding: {css(padding)};
 		--transition: {css(transition)};
 	"
@@ -169,7 +177,7 @@
 				& > .default.background {
 					background: var(--colour-background-hover);
 					outline: solid 1px var(--colour-background-hover);
-					box-shadow: var(--shadow);
+					box-shadow: var(--shadow-hover);
 				}
 			}
 		}
@@ -182,7 +190,7 @@
 
 				transition: var(--transition), outline 0s;
 				outline: solid 1px var(----colour-text-tertiary);
-				box-shadow: var(----shadow-inner-md), var(----shadow-none);
+				box-shadow: var(--shadow-active);
 			}
 		}
 
@@ -193,7 +201,7 @@
 			& > .default.background {
 				background: var(--colour-background-disabled);
 				outline: solid 1px var(--colour-background-disabled);
-				box-shadow: var(--shadow);
+				box-shadow: var(--shadow-disabled);
 			}
 		}
 	}

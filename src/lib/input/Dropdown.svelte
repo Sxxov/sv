@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, type ComponentProps } from 'svelte';
 	import { dropIn } from '../ut/transition';
 
 	import { ButtonVariants } from '../button/ButtonVariants';
@@ -25,6 +25,7 @@
 	export let items: [IItem, ...IItem[]];
 	export let selectedItemId = items[0].id;
 	export let active = false;
+	export let inputProps: Partial<ComponentProps<Input>> = {};
 
 	let value = '';
 	let hasMounted = false;
@@ -84,6 +85,7 @@
 	}}
 >
 	<Input
+		{...inputProps}
 		{width}
 		height={heightInput}
 		{name}

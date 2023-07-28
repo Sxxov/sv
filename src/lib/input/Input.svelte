@@ -9,14 +9,15 @@
 	export let colourBackground: TCss = '----colour-background-secondary';
 	export let colourBackgroundHover: TCss = '----colour-background-tertiary';
 	export let colourBackgroundFocus: TCss = '----colour-background-primary';
-	export let colourBackgroundDisabled: TCss = colourBackground;
 	export let colourText: TCss = '----colour-text-primary';
 	export let colourTextHover: TCss = '----colour-text-primary';
 	export let colourTextFocus: TCss = '----colour-text-primary';
-	export let colourTextDisabled: TCss = '----colour-text-disabled';
 	export let colourLabel: TCss = '----colour-text-primary';
 	export let colourLabelValued: TCss = '----colour-accent-primary';
-	export let colourLabelDisabled: TCss = '----colour-text-disabled';
+	export let shadow: TCss = 'var(----shadow-inner-sm), var(----shadow-sm)';
+	export let shadowHover: TCss = shadow;
+	export let shadowFocus: TCss =
+		'var(----shadow-inner-sm), var(----shadow-md)';
 	export let name: string;
 	export let label = '';
 	export let width: TCss = '100%';
@@ -60,14 +61,14 @@
 		--colour-background: {css(colourBackground)};
 		--colour-background-hover: {css(colourBackgroundHover)};
 		--colour-background-focus: {css(colourBackgroundFocus)};
-		--colour-background-disabled: {css(colourBackgroundDisabled)};
 		--colour-text: {css(colourText)};
 		--colour-text-hover: {css(colourTextHover)};
 		--colour-text-focus: {css(colourTextFocus)};
-		--colour-text-disabled: {css(colourTextDisabled)};
 		--colour-label: {css(colourLabel)};
 		--colour-label-valued: {css(colourLabelValued)};
-		--colour-label-disabled: {css(colourLabelDisabled)};
+		--shadow: {css(shadow)};
+		--shadow-hover: {css(shadowHover)};
+		--shadow-focus: {css(shadowFocus)};
 		--top-input: {css(label ? 42 : 0)};
 		--top-slot: {css(label ? 56 : 0)};
 		--roundness-input: {multiline
@@ -117,9 +118,8 @@
 			<div class="clear">
 				<Button
 					{...ButtonVariants.Fab.Md}
-					{...ButtonVariants.Secondary}
+					{...ButtonVariants.Transparent}
 					colourBackground="transparent"
-					shadow="----shadow-none"
 					on:click={() => {
 						if (input) {
 							input.value = '';
@@ -212,7 +212,7 @@
 
 			outline: 1px solid var(--colour-background);
 			outline-offset: -1px;
-			box-shadow: var(----shadow-inner-sm), var(----shadow-sm);
+			box-shadow: var(--shadow);
 
 			resize: none;
 
@@ -225,6 +225,7 @@
 
 			&:hover {
 				background: var(--colour-background-hover);
+				box-shadow: var(--shadow-hover);
 				outline: 1px solid var(--colour-background-hover);
 			}
 
@@ -232,7 +233,7 @@
 				outline: 0;
 
 				background: var(--colour-background-focus);
-				box-shadow: var(----shadow-inner-sm), var(----shadow-md);
+				box-shadow: var(--shadow-focus);
 				outline: 1px solid var(--colour-background-focus);
 			}
 

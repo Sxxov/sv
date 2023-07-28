@@ -6,6 +6,7 @@
 	import Svg from '../lib/svg/Svg.svelte';
 	import { ButtonVariants } from '../lib/button';
 	import { Dropdown } from '../lib/input';
+	import { InputVariants } from '../lib/input/InputVariants';
 </script>
 
 <div class="home">
@@ -34,6 +35,13 @@
 		multiline
 		height="200px"
 	/>
+	<Input
+		{...InputVariants.Transparent}
+		name="d"
+		label="textarea limited transparent"
+		multiline
+		height="200px"
+	/>
 	<div style="min-height: 200px; max-height: 300px">
 		<Input
 			name="e"
@@ -43,6 +51,10 @@
 		/>
 	</div>
 	<Button {...ButtonVariants.Fab.Md}><Svg svg={ic_check} /></Button>
+	<Button
+		{...ButtonVariants.Fab.Md}
+		{...ButtonVariants.Transparent}><Svg svg={ic_check} /></Button
+	>
 	<Dropdown
 		name="thing"
 		items={[

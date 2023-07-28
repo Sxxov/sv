@@ -19,6 +19,8 @@ export const ButtonVariants = {
 		colourBackgroundHover: '----colour-background-secondary',
 		colourText: '----colour-text-primary',
 		colourTextHover: '----colour-text-primary',
+		shadow: '----shadow-none',
+		shadowHover: '----shadow-md',
 	},
 	Fab: {
 		Lg: {

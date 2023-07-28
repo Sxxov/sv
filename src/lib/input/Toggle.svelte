@@ -7,14 +7,15 @@
 	export let colourBackground: TCss = '----colour-background-secondary';
 	export let colourBackgroundHover: TCss = '----colour-background-tertiary';
 	export let colourBackgroundFocus: TCss = '----colour-background-primary';
-	export let colourBackgroundDisabled: TCss = colourBackground;
 	export let colourText: TCss = '----colour-text-primary';
 	export let colourTextHover: TCss = '----colour-text-primary';
 	export let colourTextFocus: TCss = '----colour-text-primary';
-	export let colourTextDisabled: TCss = '----colour-text-disabled';
 	export let colourLabel: TCss = '----colour-text-primary';
 	export let colourLabelValued: TCss = '----colour-accent-primary';
-	export let colourLabelDisabled: TCss = '----colour-text-secondary';
+	export let shadow: TCss = 'var(----shadow-inner-sm), var(----shadow-sm)';
+	export let shadowHover: TCss = shadow;
+	export let shadowFocus: TCss =
+		'var(----shadow-inner-sm), var(----shadow-md)';
 	export let name: string;
 	export let label: string;
 	export let id: string | undefined = undefined;
@@ -38,14 +39,14 @@
 		--colour-background: {css(colourBackground)};
 		--colour-background-hover: {css(colourBackgroundHover)};
 		--colour-background-focus: {css(colourBackgroundFocus)};
-		--colour-background-disabled: {css(colourBackgroundDisabled)};
 		--colour-text: {css(colourText)};
 		--colour-text-hover: {css(colourTextHover)};
 		--colour-text-focus: {css(colourTextFocus)};
-		--colour-text-disabled: {css(colourTextDisabled)};
 		--colour-label: {css(colourLabel)};
 		--colour-label-valued: {css(colourLabelValued)};
-		--colour-label-disabled: {css(colourLabelDisabled)};
+		--shadow: {css(shadow)};
+		--shadow-hover: {css(shadowHover)};
+		--shadow-focus: {css(shadowFocus)};
 		--width-track: {css(widthTrack)};
 		--width-knob: {css(widthKnob)};
 		--height-track: {css(heightTrack)};
@@ -100,7 +101,7 @@
 		border: 0;
 
 		outline: 1px solid var(--colour-background);
-		box-shadow: var(----shadow-inner-none), var(----shadow-sm);
+		box-shadow: var(--shadow);
 		border-radius: var(----roundness);
 
 		padding-top: 56px;
@@ -116,6 +117,7 @@
 
 		&:hover {
 			background: var(--colour-background-hover);
+			box-shadow: var(--shadow-hover);
 			outline: 1px solid var(--colour-background-hover);
 		}
 
@@ -123,7 +125,7 @@
 			outline: 0;
 
 			background: var(--colour-background-focus);
-			box-shadow: var(----shadow-inner-sm), var(----shadow-md);
+			box-shadow: var(--shadow-focus);
 			outline: 1px solid var(--colour-background-focus);
 		}
 
