@@ -16,6 +16,9 @@ const remoteCache = /** @type {Map<string, string>} */ (new Map());
 
 export default {
 	assetsInclude: ['**/*.glb', '**/*.gltf'],
+	server: {
+		port: 5174,
+	},
 	plugins: [
 		alias({
 			entries: [
