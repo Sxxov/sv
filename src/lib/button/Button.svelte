@@ -59,6 +59,9 @@
 	on:mousedown
 	on:mouseup
 	on:click
+	on:keydown
+	on:keyup
+	on:keypress
 >
 	<slot name="background">
 		<div class="default background" />
