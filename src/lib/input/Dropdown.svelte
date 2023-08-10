@@ -9,6 +9,7 @@
 	import { ic_expand_less, ic_expand_more, ic_search } from 'maic/two_tone';
 	import Svg from '../svg/Svg.svelte';
 	import Input from './Input.svelte';
+	import { mod } from '@sxxov/ut/math';
 
 	interface IItem {
 		id: string;
@@ -30,6 +31,24 @@
 	let value = '';
 	let hasMounted = false;
 
+	const selectUp = () => {
+		const index = searchedItems.findIndex(
+			(item) => item.id === selectedItemId,
+		);
+		const item = searchedItems[mod(index + 1, searchedItems.length)];
+
+		if (item) selectedItemId = item.id;
+	};
+
+	const selectDown = () => {
+		const index = searchedItems.findIndex(
+			(item) => item.id === selectedItemId,
+		);
+		const item = searchedItems[mod(index - 1, searchedItems.length)];
+
+		if (item) selectedItemId = item.id;
+	};
+
 	$: searchedItems = items.filter(
 		(item) =>
 			item.title.toLowerCase().includes(value.toLowerCase()) ||
@@ -40,7 +59,17 @@
 
 	$: selectedItem = items.find((item) => item.id === selectedItemId);
 
+	const selectFirstIfNone = () => {
+		if (
+			searchedItems.length > 0 &&
+			!searchedItems.some(({ id }) => id === selectedItemId)
+		) {
+			selectedItem = searchedItems[0]!;
+			selectedItemId = selectedItem.id;
+		}
+	};
 	$: if (hasMounted && !active) {
+		selectFirstIfNone();
 		value = selectedItem?.title ?? '';
 		if (document.activeElement instanceof HTMLElement)
 			document.activeElement.blur();
@@ -63,24 +92,40 @@
 	aria-owns="listbox"
 	aria-controls="listbox"
 	aria-activedescendant={selectedItemId}
-	tabindex="0"
+	tabindex={-1}
 	on:focusin={(e) => {
 		if (e.target instanceof HTMLInputElement)
 			e.target.setSelectionRange(0, e.target.value.length);
 
 		searchedItems = items;
-		active = true;
 	}}
-	on:focusout={() => {
-		active = false;
-	}}
-	on:keyup={(e) => {
-		if (e.key === 'Escape') {
-			active = false;
-		} else if (e.key === 'Enter') {
-			const id = searchedItems[0]?.id;
-			if (id) selectedItemId = id;
-			active = false;
+	on:keydown={(e) => {
+		switch (e.key) {
+			case 'Escape':
+				active = false;
+				break;
+			case 'Enter':
+				active = !active;
+
+				break;
+			case 'ArrowDown':
+				e.preventDefault();
+				selectDown();
+				break;
+			case 'ArrowUp':
+				e.preventDefault();
+				selectUp();
+				break;
+			case 'Tab':
+				if (active) {
+					e.preventDefault();
+
+					if (e.shiftKey) selectUp();
+					else selectDown();
+				}
+
+				break;
+			default:
 		}
 	}}
 >
@@ -123,6 +168,7 @@
 				{...ButtonVariants.Fab.Md}
 				colourBackground="transparent"
 				shadow="----shadow-none"
+				tabindex={-1}
 				on:mousedown={(e) => {
 					e.preventDefault();
 				}}
@@ -160,6 +206,7 @@
 								? ButtonVariants.Primary
 								: ButtonVariants.Secondary}
 							shadow="----shadow-none"
+							tabindex={-1}
 							on:mousedown={(e) => {
 								e.preventDefault();
 							}}

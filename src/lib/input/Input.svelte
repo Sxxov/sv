@@ -29,6 +29,7 @@
 	export let active = false;
 	export let multiline = false;
 	export let height: TCss = label ? (multiline ? 'auto' : '112px') : '56px';
+	export let tabindex = 0;
 
 	let input: HTMLInputElement | HTMLTextAreaElement | undefined;
 	let scrollHeight = 112;
@@ -84,6 +85,7 @@
 			{value}
 		/>
 	</div>
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<svelte:element
 		this={multiline ? 'textarea' : 'input'}
 		{id}
@@ -93,6 +95,7 @@
 		{autocomplete}
 		{value}
 		{name}
+		{tabindex}
 		bind:this={input}
 		on:input
 		on:input={onSynch}
@@ -106,6 +109,9 @@
 		on:blur={() => {
 			active = false;
 		}}
+		on:keydown
+		on:keyup
+		on:keypress
 		style="
 			--height-input: {multiline ? css(scrollHeight) : '100%'};
 		"
@@ -120,6 +126,7 @@
 					{...ButtonVariants.Fab.Md}
 					{...ButtonVariants.Transparent}
 					colourBackground="transparent"
+					tabindex={-1}
 					on:click={() => {
 						if (input) {
 							input.value = '';

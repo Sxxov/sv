@@ -27,6 +27,7 @@
 								   box-shadow 0.3s var(----ease-fast-slow),
 								   transform 0.3s var(----ease-fast-slow)`;
 	export let type: 'button' | 'submit' | 'reset' = 'button';
+	export let tabindex = 0;
 </script>
 
 <button
@@ -53,6 +54,7 @@
 	"
 	class:left={$$slots.left}
 	class:right={$$slots.right}
+	{tabindex}
 	on:touchstart
 	on:touchend
 	on:touchcancel

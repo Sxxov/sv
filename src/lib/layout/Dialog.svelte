@@ -18,12 +18,13 @@
 {#if isActive}
 	<div
 		class="overlay"
+		role="presentation"
 		in:fadeIn
 		out:fadeOut={{ easing: quintOut }}
 		on:click={() => {
 			if (shouldDismissOnOverlayClick) isActive = false;
 		}}
-		on:keyup={(event) => {
+		on:keydown={(event) => {
 			if (event.key === 'Escape') event.currentTarget.click();
 		}}
 	/>

@@ -7,6 +7,7 @@
 
 	export let level: Levels = Levels.INFO;
 	export let colourOverride: TCss | undefined = undefined;
+	export let tabindex = -1;
 
 	const LevelIconSvg = [
 		ic_info,
@@ -23,9 +24,11 @@
 	class="hint"
 	role="treeitem"
 	aria-selected="false"
-	tabindex="0"
+	{tabindex}
 	on:click
+	on:keydown
 	on:keyup
+	on:keypress
 >
 	<span
 		class:none={level === Levels.NONE}

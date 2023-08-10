@@ -27,6 +27,7 @@
 	export let heightKnob: TCss = 35;
 	export let roundness: TCss = '----roundness';
 	export let checked = false;
+	export let tabindex = 0;
 
 	$: id ??= `toggle--${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 </script>
@@ -59,6 +60,7 @@
 	<slot name="left" />
 	<input
 		type="checkbox"
+		tabindex="-1"
 		bind:checked
 		on:input={() => {
 			checked = !checked;
@@ -75,6 +77,7 @@
 					width="100%"
 					roundness="calc({css(roundness)} - 2px)"
 					padding={0}
+					{tabindex}
 					on:click={() => {
 						checked = !checked;
 					}}

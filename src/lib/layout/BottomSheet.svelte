@@ -204,7 +204,7 @@
 			on:click={() => {
 				state = BottomSheetStates.IDLE | BottomSheetStates.SETTLING;
 			}}
-			on:keyup={(event) => {
+			on:keydown={(event) => {
 				if (event.key === 'Escape') event.currentTarget.click();
 			}}
 		/>
