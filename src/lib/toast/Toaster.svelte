@@ -74,7 +74,7 @@
 		>
 			<Hint
 				level={toast.level}
-				colourOverride="--colour-text-primary"
+				colourOverride="----colour-text-primary"
 			>
 				{toast.text}
 			</Hint>
@@ -98,7 +98,7 @@
 		right: 0;
 		bottom: 0;
 
-		margin: var(--padding);
+		margin: var(----padding);
 
 		z-index: 1000;
 
