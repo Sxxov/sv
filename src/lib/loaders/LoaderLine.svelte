@@ -2,8 +2,8 @@
 	import { css, type TCss } from '@sxxov/ut/css';
 
 	export let width: TCss = '100%';
-	export let strokeColour: TCss = '--colour-accent-primary';
-	export let backgroundStrokeColour: TCss = '--colour-accent-secondary';
+	export let strokeColour: TCss = '----colour-accent-primary';
+	export let backgroundStrokeColour: TCss = '----colour-accent-secondary';
 	export let strokeWeight: TCss = 1;
 	export let completion = NaN;
 </script>
