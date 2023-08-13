@@ -39,6 +39,7 @@
 				svg={LevelIconSvg[level]}
 				width={16}
 				colour={css(colour)}
+				firm
 			/>
 		{/if}
 		{#if $$slots.default}
@@ -60,7 +61,7 @@
 			display: flex;
 			align-items: center;
 
-			gap: 12px;
+			gap: 14px;
 
 			overflow: hidden;
 

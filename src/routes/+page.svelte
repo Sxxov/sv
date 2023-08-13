@@ -7,9 +7,28 @@
 	import { ButtonVariants } from '../lib/button';
 	import { Dropdown } from '../lib/input';
 	import { InputVariants } from '../lib/input/InputVariants';
+	import Toaster, { toasts } from '../lib/toast/Toaster.svelte';
+	import { Levels } from '../lib/common/enums';
+	import { ToastThing } from '../lib/toast';
+
+	toasts.push(
+		new ToastThing({
+			text: 'hello',
+			duration: Infinity,
+			level: Levels.OK,
+		}),
+	);
+	toasts.push(
+		new ToastThing({
+			text: 'hello Auasd hUIAHD uhaS UIDHUIAS HDUIh UIHD UISAHD UISAHDui hUI HDOUISAHD iuHASUI DH',
+			duration: Infinity,
+			level: Levels.OK,
+		}),
+	);
 </script>
 
 <div class="home">
+	<Toaster />
 	<Input
 		name="a"
 		label="a"

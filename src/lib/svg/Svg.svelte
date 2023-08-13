@@ -6,10 +6,12 @@
 	export let width: TCss = '24px';
 	export let svg: TSvgString;
 	export let colour: TCss = 'currentColor';
+	export let firm = false;
 </script>
 
 <div
 	class="svg"
+	class:firm
 	style="
 		--colour-svg: {css(colour)};
 		--height-svg: {css(height)};
@@ -34,6 +36,11 @@
 			display: block;
 			height: var(--height-svg);
 			width: var(--width-svg);
+		}
+
+		&.firm > :global(svg) {
+			min-height: var(--height-svg);
+			min-width: var(--width-svg);
 		}
 	}
 </style>
