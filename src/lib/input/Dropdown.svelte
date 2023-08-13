@@ -23,7 +23,7 @@
 	export let heightInput: TCss = label ? '112px' : '56px';
 	export let heightMaxItems: TCss = '192px';
 	export let name: string;
-	export let items: [IItem, ...IItem[]];
+	export let items: readonly [IItem, ...IItem[]];
 	export let selectedItemId = items[0].id;
 	export let active = false;
 	export let inputProps: Partial<ComponentProps<Input>> = {};
@@ -55,7 +55,7 @@
 			item.terms.some((v) =>
 				v.toLowerCase().includes(value.toLowerCase()),
 			),
-	);
+	) as unknown as typeof items;
 
 	$: selectedItem = items.find((item) => item.id === selectedItemId);
 
