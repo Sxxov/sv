@@ -84,6 +84,7 @@
 	class="dropdown"
 	class:active
 	style="
+		--width: {css(width)};
 		--height-input: {css(heightInput)};
 	"
 	role="combobox"
@@ -130,7 +131,7 @@
 	}}
 >
 	<Input
-		{width}
+		width="100%"
 		height={heightInput}
 		{name}
 		{label}
@@ -233,6 +234,7 @@
 
 <style lang="postcss">
 	.dropdown {
+		width: var(--width);
 		height: var(--height-input);
 
 		& .input.left {
