@@ -74,35 +74,32 @@
 </script>
 
 <div class="toaster">
-	{#each $toasts as init}
-		{@const toast = initToToastThing.get(init)}
-		{#if toast}
-			<div
-				class="content"
-				style="
+	{#each initToToastThing as [init, toast]}
+		<div
+			class="content"
+			style="
 					--colour-toast: {css(String(LevelColours[toast.level]))}
 				"
-				in:dropIn
-				out:dropOut
+			in:dropIn
+			out:dropOut
+		>
+			<Hint
+				level={toast.level}
+				colourOverride="----colour-text-primary"
 			>
-				<Hint
-					level={toast.level}
-					colourOverride="----colour-text-primary"
-				>
-					{toast.text}
-				</Hint>
-				<Button
-					{...ButtonVariants.Secondary}
-					{...ButtonVariants.Fab.Sm}
-					{...ButtonVariants.Shadow.Sm}
-					colourBackground="transparent"
-					colourBackgroundHover="#fff2"
-					on:click={() => dismiss(init)}
-				>
-					<Svg svg={ic_clear} />
-				</Button>
-			</div>
-		{/if}
+				{toast.text}
+			</Hint>
+			<Button
+				{...ButtonVariants.Secondary}
+				{...ButtonVariants.Fab.Sm}
+				{...ButtonVariants.Shadow.Sm}
+				colourBackground="transparent"
+				colourBackgroundHover="#fff2"
+				on:click={() => dismiss(init)}
+			>
+				<Svg svg={ic_clear} />
+			</Button>
+		</div>
 	{/each}
 </div>
 
