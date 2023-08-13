@@ -25,6 +25,13 @@
 			level: Levels.OK,
 		}),
 	);
+	setTimeout(() => {
+		toasts.push({
+			text: 'helloAAAA',
+			duration: Infinity,
+			level: Levels.OK,
+		});
+	}, 1000);
 </script>
 
 <div class="home">

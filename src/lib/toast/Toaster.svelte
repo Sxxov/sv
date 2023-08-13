@@ -23,8 +23,8 @@
 	import { ButtonVariants } from '../button/ButtonVariants';
 	import Svg from '../svg/Svg.svelte';
 
-	const initToTimeoutHandle = new Map<TToastInit, number>();
-	const initToToastThing = new Map<TToastInit, ToastThing>();
+	let initToTimeoutHandle = new Map<TToastInit, number>();
+	let initToToastThing = new Map<TToastInit, ToastThing>();
 
 	onMount(() => {
 		if (instanceCount > 0)
@@ -47,6 +47,7 @@
 		if (!thing) {
 			thing = new ToastThing(init);
 			initToToastThing.set(init, thing);
+			initToToastThing = initToToastThing;
 		}
 
 		scheduleDismiss(init, thing.duration);
@@ -58,7 +59,9 @@
 	function dismiss(init: TToastInit) {
 		toasts.splice(toasts.indexOf(init), 1);
 		initToToastThing.delete(init);
+		initToToastThing = initToToastThing;
 		initToTimeoutHandle.delete(init);
+		initToTimeoutHandle = initToTimeoutHandle;
 	}
 
 	function scheduleDismiss(init: TToastInit, duration: number) {
@@ -70,6 +73,7 @@
 				dismiss(init);
 			}, duration),
 		);
+		initToTimeoutHandle = initToTimeoutHandle;
 	}
 </script>
 
