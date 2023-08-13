@@ -1,6 +1,6 @@
 {
 	"name": "@sxxov/sv",
-	"version": "0.23.1",
+	"version": "0.23.2",
 	"description": "",
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.ts",
