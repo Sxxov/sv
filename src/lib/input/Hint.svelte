@@ -68,7 +68,8 @@
 			opacity: 1;
 			min-height: calc(1rem + 2em);
 
-			transition: 0.2s var(----ease-slow-slow);
+			transition: opacity 0.2s var(----ease-slow-slow),
+				height 0.2s var(----ease-slow-slow);
 
 			&.none {
 				opacity: 0;
@@ -78,7 +79,7 @@
 			& > p {
 				color: var(--colour);
 
-				transition: 0.2s var(----ease-slow-slow);
+				transition: color 0.2s var(----ease-slow-slow);
 			}
 		}
 	}
