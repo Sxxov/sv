@@ -19,17 +19,16 @@
 	export let direction: AnimationDirection = 1;
 	export let colourOverride: TCss = '';
 
+	const lottiePromise = import('lottie-web');
+	let lottie: LottiePlayer | undefined;
+	void lottiePromise.then((l) => (lottie = l.default));
+	$: if (lottie) load(lottie);
+
 	let animation: AnimationItem | undefined;
 	let contentDiv: HTMLDivElement | undefined;
 
 	$: animation?.goToAndStop(frame, true);
 	$: animation?.setDirection(direction);
-
-	onMount(async () => {
-		const { default: lottie } = await import('lottie-web');
-
-		load(lottie);
-	});
 
 	const load = (lottie: LottiePlayer) => {
 		const pending = lottie.loadAnimation({
