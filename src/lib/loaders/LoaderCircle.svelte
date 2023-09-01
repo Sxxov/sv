@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { css, type TCss } from '@sxxov/ut/css';
+	import { css, type Css } from '@sxxov/ut/css';
 
-	export let height: TCss = '100%';
-	export let width: TCss = '100%';
-	export let strokeColour: TCss = '----colour-accent-primary';
-	export let backgroundStrokeColour: TCss = '----colour-accent-secondary';
-	export let strokeWeight: TCss = 1;
+	export let height: Css = '100%';
+	export let width: Css = '100%';
+	export let strokeColour: Css = '----colour-accent-primary';
+	export let backgroundStrokeColour: Css = '----colour-accent-secondary';
+	export let strokeWeight: Css = 1;
 	export let completion = NaN;
 
 	const RADIUS = 100;

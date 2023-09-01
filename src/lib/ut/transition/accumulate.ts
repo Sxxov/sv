@@ -1,9 +1,9 @@
 import { linear } from 'svelte/easing';
-import type { ITransitionConfig } from './common/ITransitionConfig';
-import type { TTransition } from './common/TTransition';
+import type { TransitionConfig } from './common/TransitionConfig';
+import type { Transition } from './common/Transition';
 
 export const accumulate = (
-	transition: TTransition,
+	transition: Transition,
 	delayPerAccumulationMs = 50,
 ) => {
 	const indexToAccumulation = new Map<number, number>();
@@ -28,7 +28,7 @@ export const accumulate = (
 						delay = 0,
 						duration = 0,
 						easing = linear,
-					}: ITransitionConfig = {},
+					}: TransitionConfig = {},
 				) => {
 					return transition(element, {
 						delay: delay + accumulation,

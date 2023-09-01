@@ -1,29 +1,36 @@
+<script
+	lang="ts"
+	context="module"
+>
+	export interface DropdownRow {
+		id: string;
+		icon: SvgString;
+		title: string;
+		terms: readonly string[];
+	}
+
+	export type DropdownRows = readonly [DropdownRow, ...DropdownRow[]];
+</script>
+
 <script lang="ts">
 	import { onMount, type ComponentProps } from 'svelte';
 	import { dropIn } from '../ut/transition';
 
 	import { ButtonVariants } from '../button/ButtonVariants';
 	import Button from '../button/Button.svelte';
-	import { css, type TCss } from '@sxxov/ut/css';
-	import type { TSvgString } from '@sxxov/ut/types';
+	import { css, type Css } from '@sxxov/ut/css';
+	import type { SvgString } from '@sxxov/ut/types';
 	import { ic_expand_less, ic_expand_more, ic_search } from 'maic/two_tone';
 	import Svg from '../svg/Svg.svelte';
 	import Input from './Input.svelte';
 	import { mod } from '@sxxov/ut/math';
 
-	interface IItem {
-		id: string;
-		icon: TSvgString;
-		title: string;
-		terms: readonly string[];
-	}
-
-	export let width: TCss = '100%';
+	export let width: Css = '100%';
 	export let label = '';
-	export let heightInput: TCss = label ? '112px' : '56px';
-	export let heightMaxItems: TCss = '192px';
+	export let heightInput: Css = label ? '112px' : '56px';
+	export let heightMaxItems: Css = '192px';
 	export let name: string;
-	export let items: readonly [IItem, ...IItem[]];
+	export let items: DropdownRows;
 	export let selectedItemId = items[0].id;
 	export let active = false;
 	export let inputProps: Partial<ComponentProps<Input>> = {};

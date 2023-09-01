@@ -1,4 +1,4 @@
-import type { TVariants } from '../common/types/TVariants';
+import type { Variants } from '../common/types/Variants';
 import type Button from './Button.svelte';
 
 export const ButtonVariants = {
@@ -56,4 +56,4 @@ export const ButtonVariants = {
 			shadow: 'var(----shadow-inner-none), var(----shadow-none)',
 		},
 	},
-} as const satisfies TVariants<Button>;
+} as const satisfies Variants<Button>;

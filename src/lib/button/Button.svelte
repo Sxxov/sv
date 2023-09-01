@@ -1,28 +1,28 @@
 <script lang="ts">
-	import { css, type TCss } from '@sxxov/ut/css';
+	import { css, type Css } from '@sxxov/ut/css';
 	import Ripple from './Ripple.svelte';
 	import Spacer from '../layout/Spacer.svelte';
 
-	export let colourBackground: TCss = '----colour-background-secondary';
-	export let colourBackgroundHover: TCss = '----colour-background-tertiary';
-	export let colourBackgroundActive: TCss = colourBackgroundHover;
-	export let colourBackgroundDisabled: TCss = colourBackground;
-	export let colourText: TCss = '----colour-text-primary';
-	export let colourTextHover: TCss = colourText;
-	export let colourTextActive: TCss = colourText;
-	export let colourTextDisabled: TCss = '----colour-text-secondary';
-	export let width: TCss = '100%';
-	export let height: TCss = 56;
-	export let roundness: TCss = '----roundness';
-	export let shadow: TCss = 'var(----shadow-inner-sm), var(----shadow-md)';
-	export let shadowHover: TCss =
+	export let colourBackground: Css = '----colour-background-secondary';
+	export let colourBackgroundHover: Css = '----colour-background-tertiary';
+	export let colourBackgroundActive: Css = colourBackgroundHover;
+	export let colourBackgroundDisabled: Css = colourBackground;
+	export let colourText: Css = '----colour-text-primary';
+	export let colourTextHover: Css = colourText;
+	export let colourTextActive: Css = colourText;
+	export let colourTextDisabled: Css = '----colour-text-secondary';
+	export let width: Css = '100%';
+	export let height: Css = 56;
+	export let roundness: Css = '----roundness';
+	export let shadow: Css = 'var(----shadow-inner-sm), var(----shadow-md)';
+	export let shadowHover: Css =
 		'var(----shadow-inner-sm), var(----shadow-lg)';
-	export let shadowActive: TCss =
+	export let shadowActive: Css =
 		'var(----shadow-inner-md), var(----shadow-none)';
-	export let shadowDisabled: TCss = shadow;
+	export let shadowDisabled: Css = shadow;
 	export let disabled = false;
-	export let padding: TCss = '16px max(var(--roundness), 14px)';
-	export let transition: TCss = `background 0.2s var(----ease-fast-slow),
+	export let padding: Css = '16px max(var(--roundness), 14px)';
+	export let transition: Css = `background 0.2s var(----ease-fast-slow),
 								   outline 0.3s var(----ease-slow-slow),
 								   box-shadow 0.3s var(----ease-fast-slow),
 								   transform 0.3s var(----ease-fast-slow)`;

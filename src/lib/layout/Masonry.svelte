@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { whenResize } from '../ut/use/whenResize';
 
-	import { css, type TCss } from '@sxxov/ut/css';
+	import { css, type Css } from '@sxxov/ut/css';
 
 	type T = $$Generic<Record<any, any>>;
 
 	export let items: T[];
-	export let width: TCss = '100%';
-	export let columnWidth: TCss = '300px';
-	export let height: TCss = '100%';
-	export let gap: TCss = 'var(--padding, 28px)';
+	export let width: Css = '100%';
+	export let columnWidth: Css = '300px';
+	export let height: Css = '100%';
+	export let gap: Css = 'var(--padding, 28px)';
 
 	let componentDiv: HTMLDivElement | undefined;
 	let itemDivs: HTMLDivElement[] = [];

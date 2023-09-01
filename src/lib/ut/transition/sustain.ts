@@ -1,11 +1,8 @@
-import type { TTransition } from './common/TTransition';
-import { TransitionFrameThing } from './common/TransitionFrameThing';
+import type { Transition } from './common/Transition';
 
-export const sustain: TTransition = () => {
-	return TransitionFrameThing.from({
-		delay: 0,
-		duration: 0,
-		easing: (t) => t,
-		css: () => '',
-	});
-};
+export const sustain: Transition = () => ({
+	delay: 0,
+	duration: 0,
+	easing: (t) => t,
+	css: () => '',
+});

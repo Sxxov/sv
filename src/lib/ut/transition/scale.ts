@@ -1,16 +1,16 @@
 import { quintIn, quintInOut, quintOut } from 'svelte/easing';
-import type { ITransitionConfig } from './common/ITransitionConfig';
-import type { TTransition } from './common/TTransition';
-import { TransitionFrameThing } from './common/TransitionFrameThing';
+import type { TransitionConfig } from './common/TransitionConfig';
+import type { Transition } from './common/Transition';
+import type { TransitionFrame } from './common/TransitionFrame';
 
-export const scale: TTransition = (
+export const scale: Transition = (
 	element: Element,
-	{ delay = 0, duration = 200, easing = quintInOut }: ITransitionConfig = {},
-	tick?: TransitionFrameThing['tick'],
+	{ delay = 0, duration = 200, easing = quintInOut }: TransitionConfig = {},
+	tick?: TransitionFrame['tick'],
 ) => {
 	const { transform, opacity } = getComputedStyle(element);
 
-	return TransitionFrameThing.from({
+	return {
 		delay,
 		duration,
 		easing,
@@ -19,12 +19,12 @@ export const scale: TTransition = (
 			opacity: ${Number(opacity) * Math.min(t * 2, 1)};
 		`,
 		...(tick && { tick }),
-	});
+	};
 };
 
-export const scaleIn: TTransition = (
+export const scaleIn: Transition = (
 	element: Element,
-	options?: ITransitionConfig,
+	options?: TransitionConfig,
 ) => {
 	return scale(element, {
 		easing: quintOut,
@@ -32,9 +32,9 @@ export const scaleIn: TTransition = (
 	});
 };
 
-export const scaleOut: TTransition = (
+export const scaleOut: Transition = (
 	element: Element,
-	options?: ITransitionConfig,
+	options?: TransitionConfig,
 ) => {
 	return scale(element, {
 		easing: quintIn,

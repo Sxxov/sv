@@ -20,19 +20,19 @@
 
 	import { Composition, Tween } from '@sxxov/ut/animation';
 	import { bezierExpoOut } from '@sxxov/ut/bezier/beziers';
-	import { css, type TCss } from '@sxxov/ut/css';
+	import { css, type Css } from '@sxxov/ut/css';
 
 	import { clamp } from '@sxxov/ut/math';
 	import { Store } from '@sxxov/ut/store';
-	import { resolveEventClientPoint, type IPoint } from '@sxxov/ut/viewport';
+	import { resolvePointerFromEvent, type Point } from '@sxxov/ut/viewport';
 	import { onDestroy, onMount } from 'svelte';
 	import Rr from '../functional/Rr.svelte';
 	import { whenResize } from '../ut/use/whenResize';
 
 	/** The width of the ripple surface. */
-	export let width: TCss = '100%';
+	export let width: Css = '100%';
 	/** The height of the ripple surface. */
-	export let height: TCss = '100%';
+	export let height: Css = '100%';
 	/** The minimum size of each ripple. */
 	export let sizeMin = 560;
 	/** The maximum size of each ripple. */
@@ -50,7 +50,7 @@
 	let instanceIndex = 0;
 	/** Backing data for each ripple. */
 	let rippleData: {
-		point: IPoint;
+		point: Point;
 		tweenSize: Tween;
 		tweenOpacity: Tween;
 	}[] = [];
@@ -99,7 +99,7 @@
 			isTouching = true;
 
 		/** The position of the cursor/touch relative to the ripple surface. */
-		const { x: eventX, y: eventY } = resolveEventClientPoint(event);
+		const { x: eventX, y: eventY } = resolvePointerFromEvent(event);
 		/** The position of the ripple surface relative to the document. */
 		const { x: elemX, y: elemY } = (
 			event.currentTarget as HTMLElement

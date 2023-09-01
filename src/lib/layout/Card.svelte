@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { css, type TCss } from '@sxxov/ut/css';
+	import { css, type Css } from '@sxxov/ut/css';
 
-	export let height: TCss = '100%';
-	export let width: TCss = '100%';
-	export let colourBackground: TCss = '----colour-background-primary';
-	export let shadowBackground: TCss = '----shadow-2xl';
-	export let shadowInner: TCss = '----shadow-inner-2xl';
-	export let roundness: TCss = '----roundness';
+	export let height: Css = '100%';
+	export let width: Css = '100%';
+	export let colourBackground: Css = '----colour-background-primary';
+	export let shadowBackground: Css = '----shadow-2xl';
+	export let shadowInner: Css = '----shadow-inner-2xl';
+	export let roundness: Css = '----roundness';
 	export let clickable = true;
 </script>
 

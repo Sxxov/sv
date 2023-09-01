@@ -2,11 +2,11 @@
 	import { ic_info, ic_done, ic_error, ic_warning } from 'maic/two_tone';
 	import { LevelColours } from '../common/enums/LevelColours';
 	import { Levels } from '../common/enums/Levels';
-	import { css, type TCss } from '@sxxov/ut/css';
+	import { css, type Css } from '@sxxov/ut/css';
 	import Svg from '../svg/Svg.svelte';
 
 	export let level: Levels = Levels.INFO;
-	export let colourOverride: TCss | undefined = undefined;
+	export let colourOverride: Css | undefined = undefined;
 	export let tabindex = -1;
 
 	const LevelIconSvg = [

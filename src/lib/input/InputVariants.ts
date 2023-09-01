@@ -1,5 +1,4 @@
-import type { ComponentProps } from 'svelte';
-import type { TVariants } from '../common/types/TVariants';
+import type { Variants } from '../common/types/Variants';
 import type Input from './Input.svelte';
 
 export const InputVariants = {
@@ -16,4 +15,4 @@ export const InputVariants = {
 		colourTextHover: '----colour-text-primary',
 		shadow: '----shadow-none',
 	},
-} as const satisfies TVariants<Input>;
+} as const satisfies Variants<Input>;

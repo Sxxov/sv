@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { css, type TCss } from '@sxxov/ut/css';
+	import { css, type Css } from '@sxxov/ut/css';
 	import type {
 		AnimationConfig,
 		AnimationDirection,
@@ -10,14 +10,14 @@
 
 	export let frame = 0;
 	export let animationData: Record<any, any>;
-	export let height: TCss = '100%';
-	export let width: TCss = '100%';
+	export let height: Css = '100%';
+	export let width: Css = '100%';
 	export let options: Pick<
 		AnimationConfig<'canvas' | 'svg' | 'html'>,
 		Exclude<keyof AnimationConfig, 'container'>
 	> = {};
 	export let direction: AnimationDirection = 1;
-	export let colourOverride: TCss = '';
+	export let colourOverride: Css = '';
 
 	const lottiePromise = import('lottie-web');
 	let lottie: LottiePlayer | undefined;

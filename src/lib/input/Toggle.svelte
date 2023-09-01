@@ -1,31 +1,31 @@
 <script lang="ts">
 	import Button from '../button/Button.svelte';
-	import { css, type TCss } from '@sxxov/ut/css';
+	import { css, type Css } from '@sxxov/ut/css';
 	import Svg from '../svg/Svg.svelte';
 	import { ic_check, ic_close } from 'maic/two_tone';
 
-	export let colourBackground: TCss = '----colour-background-secondary';
-	export let colourBackgroundHover: TCss = '----colour-background-tertiary';
-	export let colourBackgroundFocus: TCss = '----colour-background-primary';
-	export let colourText: TCss = '----colour-text-primary';
-	export let colourTextHover: TCss = '----colour-text-primary';
-	export let colourTextFocus: TCss = '----colour-text-primary';
-	export let colourLabel: TCss = '----colour-text-primary';
-	export let colourLabelValued: TCss = '----colour-accent-primary';
-	export let shadow: TCss = 'var(----shadow-inner-sm), var(----shadow-sm)';
-	export let shadowHover: TCss = shadow;
-	export let shadowFocus: TCss =
+	export let colourBackground: Css = '----colour-background-secondary';
+	export let colourBackgroundHover: Css = '----colour-background-tertiary';
+	export let colourBackgroundFocus: Css = '----colour-background-primary';
+	export let colourText: Css = '----colour-text-primary';
+	export let colourTextHover: Css = '----colour-text-primary';
+	export let colourTextFocus: Css = '----colour-text-primary';
+	export let colourLabel: Css = '----colour-text-primary';
+	export let colourLabelValued: Css = '----colour-accent-primary';
+	export let shadow: Css = 'var(----shadow-inner-sm), var(----shadow-sm)';
+	export let shadowHover: Css = shadow;
+	export let shadowFocus: Css =
 		'var(----shadow-inner-sm), var(----shadow-md)';
 	export let name: string;
 	export let label: string;
 	export let id: string | undefined = undefined;
-	export let width: TCss = '100%';
-	export let widthTrack: TCss = 56;
-	export let widthKnob: TCss = 35;
-	export let height: TCss = 112;
-	export let heightTrack: TCss = 35;
-	export let heightKnob: TCss = 35;
-	export let roundness: TCss = '----roundness';
+	export let width: Css = '100%';
+	export let widthTrack: Css = 56;
+	export let widthKnob: Css = 35;
+	export let height: Css = 112;
+	export let heightTrack: Css = 35;
+	export let heightKnob: Css = 35;
+	export let roundness: Css = '----roundness';
 	export let checked = false;
 	export let tabindex = 0;
 

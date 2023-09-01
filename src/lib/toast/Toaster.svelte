@@ -2,11 +2,13 @@
 	context="module"
 	lang="ts"
 >
-	import { ArrayStore } from '@sxxov/ut/store/stores';
+	export interface ToastRow {
+		text: string;
+		level?: Levels;
+		duration?: number;
+	}
 
-	type TToastInit = ConstructorParameters<typeof ToastThing>[0];
-
-	export const toasts = new ArrayStore<TToastInit>();
+	export const toasts = new ArrayStore<ToastRow>();
 
 	let instanceCount = 0;
 </script>
@@ -14,7 +16,6 @@
 <script lang="ts">
 	import Hint from '../input/Hint.svelte';
 	import { LevelColours } from '../common/enums/LevelColours';
-	import { ToastThing } from './ToastThing';
 	import { ic_clear } from 'maic/two_tone';
 	import { onMount, onDestroy } from 'svelte';
 	import { css } from '@sxxov/ut/css';
@@ -22,9 +23,10 @@
 	import Button from '../button/Button.svelte';
 	import { ButtonVariants } from '../button/ButtonVariants';
 	import Svg from '../svg/Svg.svelte';
+	import { ArrayStore } from '@sxxov/ut/store/stores';
+	import { Levels } from '../common/enums';
 
-	let initToTimeoutHandle = new Map<TToastInit, number>();
-	let initToToastThing = new Map<TToastInit, ToastThing>();
+	let toastToTimeoutHandle = new Map<ToastRow, number>();
 
 	onMount(() => {
 		if (instanceCount > 0)
@@ -34,61 +36,49 @@
 	});
 
 	onDestroy(() => {
-		for (const init of $toasts) dismiss(init);
+		for (const toast of $toasts) dismiss(toast);
 
 		--instanceCount;
 	});
 
-	$: for (const init of $toasts) {
-		if (initToTimeoutHandle.has(init)) continue;
+	$: for (const toast of $toasts)
+		if (toast.duration && !toastToTimeoutHandle.has(toast))
+			scheduleDismiss(toast, toast.duration);
 
-		let thing = initToToastThing.get(init);
+	$: for (const [toast] of toastToTimeoutHandle)
+		if (!$toasts.includes(toast)) dismiss(toast);
 
-		if (!thing) {
-			thing = new ToastThing(init);
-			initToToastThing.set(init, thing);
-			initToToastThing = initToToastThing;
-		}
-
-		scheduleDismiss(init, thing.duration);
+	function dismiss(toast: ToastRow) {
+		$toasts = $toasts.filter((v) => v !== toast);
+		toastToTimeoutHandle.delete(toast);
+		toastToTimeoutHandle = toastToTimeoutHandle;
 	}
 
-	$: for (const [init] of initToTimeoutHandle)
-		if (!$toasts.includes(init)) dismiss(init);
-
-	function dismiss(init: TToastInit) {
-		toasts.splice(toasts.indexOf(init), 1);
-		initToToastThing.delete(init);
-		initToToastThing = initToToastThing;
-		initToTimeoutHandle.delete(init);
-		initToTimeoutHandle = initToTimeoutHandle;
-	}
-
-	function scheduleDismiss(init: TToastInit, duration: number) {
+	function scheduleDismiss(toast: ToastRow, duration: number) {
 		if (duration < 0 || !Number.isFinite(duration)) return;
 
-		initToTimeoutHandle.set(
-			init,
+		toastToTimeoutHandle.set(
+			toast,
 			setTimeout(() => {
-				dismiss(init);
+				dismiss(toast);
 			}, duration),
 		);
-		initToTimeoutHandle = initToTimeoutHandle;
+		toastToTimeoutHandle = toastToTimeoutHandle;
 	}
 </script>
 
 <div class="toaster">
-	{#each initToToastThing as [init, toast]}
+	{#each $toasts as toast}
 		<div
 			class="content"
 			style="
-					--colour-toast: {css(String(LevelColours[toast.level]))}
+					--colour-toast: {css(String(LevelColours[toast.level ?? Levels.INFO]))}
 				"
 			in:dropIn
 			out:dropOut
 		>
 			<Hint
-				level={toast.level}
+				level={toast.level ?? Levels.INFO}
 				colourOverride="----colour-text-primary"
 			>
 				{toast.text}
@@ -99,7 +89,7 @@
 				{...ButtonVariants.Shadow.Sm}
 				colourBackground="transparent"
 				colourBackgroundHover="#fff2"
-				on:click={() => dismiss(init)}
+				on:click={() => dismiss(toast)}
 			>
 				<Svg svg={ic_clear} />
 			</Button>

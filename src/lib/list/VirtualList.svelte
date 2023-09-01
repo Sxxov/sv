@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { whenResize } from '../ut/use/whenResize';
 
-	import { css, type TCss } from '@sxxov/ut/css';
+	import { css, type Css } from '@sxxov/ut/css';
 
 	// based on https://github.com/sveltejs/svelte-virtual-list
 
@@ -10,7 +10,7 @@
 	type T = $$Generic<Record<any, any>>;
 
 	export let items: T[];
-	export let height: TCss = '100%';
+	export let height: Css = '100%';
 	export let itemHeight: number | undefined = undefined;
 	export let initialVisibleCount = 0;
 

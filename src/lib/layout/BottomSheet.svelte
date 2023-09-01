@@ -12,18 +12,18 @@
 </script>
 
 <script lang="ts">
-	import { css, type TCss } from '@sxxov/ut/css';
+	import { css, type Css } from '@sxxov/ut/css';
 	import { whenResize } from '../ut/use/whenResize';
 	import { whenScroll } from '../ut/use/whenScroll';
 
 	export let state: BottomSheetStates;
-	export let backgroundColour: TCss = '----colour-background-secondary';
-	export let fullHeight: TCss = '100vh';
-	export let peekHeight: TCss = '50vh';
-	export let idleHeight: TCss = 0;
+	export let backgroundColour: Css = '----colour-background-secondary';
+	export let fullHeight: Css = '100vh';
+	export let peekHeight: Css = '50vh';
+	export let idleHeight: Css = 0;
 	export let threshold = 0.25;
 
-	let currHeight: TCss;
+	let currHeight: Css;
 
 	let fullHeightComputed = 0;
 	let peekHeightComputed = 0;

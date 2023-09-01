@@ -1,1 +1,1 @@
-export * from './TVariants';
+export * from './Variants';

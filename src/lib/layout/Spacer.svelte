@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { css, type TCss } from '@sxxov/ut/css';
+	import { css, type Css } from '@sxxov/ut/css';
 
-	export let height: TCss = 0;
-	export let width: TCss = 0;
+	export let height: Css = 0;
+	export let width: Css = 0;
 </script>
 
 <div

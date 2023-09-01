@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { css, type TCss } from '@sxxov/ut/css';
-	import type { TSvgString } from '@sxxov/ut/types';
+	import { css, type Css } from '@sxxov/ut/css';
+	import type { SvgString } from '@sxxov/ut/types';
 
-	export let height: TCss = '16px';
-	export let width: TCss = '24px';
-	export let svg: TSvgString;
-	export let colour: TCss = 'currentColor';
+	export let height: Css = '16px';
+	export let width: Css = '24px';
+	export let svg: SvgString;
+	export let colour: Css = 'currentColor';
 	export let firm = false;
 </script>
 

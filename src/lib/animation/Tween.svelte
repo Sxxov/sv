@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { Tween } from '@sxxov/ut/animation';
 	import type { Composition } from '@sxxov/ut/animation';
-	import type { IBezier } from '@sxxov/ut/bezier';
+	import type { ReadableBezier } from '@sxxov/ut/bezier';
 
 	export let composition: Composition;
 	export let start: number;
 	export let end: number;
 	export let duration: number;
-	export let bezier: IBezier | undefined = undefined;
+	export let bezier: ReadableBezier | undefined = undefined;
 	export let delay = 0;
 
 	let tween: Tween;
