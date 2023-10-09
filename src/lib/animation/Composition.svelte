@@ -9,7 +9,7 @@
 
 <script lang="ts">
 	import { Composition, type Timeline } from '@sxxov/ut/animation';
-	import { getContext, setContext } from 'svelte';
+	import { getContext, onDestroy, setContext } from 'svelte';
 	import type { CompositionContext } from './CompositionContext';
 
 	export let timeline: Timeline | undefined = undefined;
@@ -17,6 +17,10 @@
 	const composition = new Composition(timeline);
 
 	setContext<CompositionContext>(compositionContextKey, { composition });
+
+	onDestroy(() => {
+		composition.destroy();
+	});
 </script>
 
 <slot {composition} />

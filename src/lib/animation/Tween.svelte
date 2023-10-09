@@ -16,6 +16,7 @@
 
 	onDestroy(() => {
 		composition.remove(tween);
+		tween.destroy();
 	});
 </script>
 
