@@ -23,4 +23,7 @@
 	});
 </script>
 
-<slot {composition} />
+<slot
+	v={$composition}
+	{composition}
+/>
