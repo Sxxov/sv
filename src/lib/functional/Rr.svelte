@@ -11,20 +11,15 @@
 		[k in keyof TT]: TT[k] extends Readable<infer U> ? U : never;
 	} = {} as any;
 
-	$: {
-		rr;
-
-		destroy();
-	}
-
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-	$: unsubscribes = Object.entries(rr).map(([k, r]) =>
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-		r.subscribe((v) => {
-			// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-			values[k as keyof TT] = v as any;
-		}),
-	);
+	$: unsubscribes =
+		(destroy(),
+		Object.entries(rr).map(([k, r]) =>
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+			r.subscribe((v) => {
+				// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+				values[k as keyof TT] = v as any;
+			}),
+		));
 
 	const destroy = () => {
 		values = {} as any;
