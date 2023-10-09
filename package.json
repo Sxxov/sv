@@ -78,7 +78,7 @@
 		"vite-plugin-copy": "^0.1.6"
 	},
 	"dependencies": {
-		"@sxxov/ut": "^3.2.0",
+		"@sxxov/ut": "^3.3.0",
 		"eslint-plugin-svelte": "^2.32.2",
 		"lottie-web": "^5.12.2",
 		"maic": "^0.14.9-1"
