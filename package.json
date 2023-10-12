@@ -101,8 +101,12 @@
 			"import": "./dist/ut/transition/index.js"
 		},
 		"./ut/action": {
-			"types": "./dist/ut/use/index.d.ts",
-			"import": "./dist/ut/use/index.js"
+			"types": "./dist/ut/action/index.d.ts",
+			"import": "./dist/ut/action/index.js"
+		},
+		"./ut/action/actions": {
+			"types": "./dist/ut/action/actions/index.d.ts",
+			"import": "./dist/ut/action/actions/index.js"
 		},
 		"./toast": {
 			"types": "./dist/toast/index.d.ts",
