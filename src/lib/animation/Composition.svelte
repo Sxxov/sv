@@ -19,7 +19,7 @@
 				is: typeof is;
 		  }
 		| {
-				timeline: typeof timeline;
+				timeline?: typeof timeline;
 		  };
 
 	export let is: C | undefined = undefined;
