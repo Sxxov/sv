@@ -12,10 +12,10 @@
 
 	const tween = new Tween(start, end, duration, bezier);
 	const { composition } = useComposition();
-	if (composition) composition.add(tween, at);
+	composition?.add(tween, at);
 
 	onDestroy(() => {
-		composition.remove(tween);
+		composition?.remove(tween);
 		tween.destroy();
 	});
 </script>

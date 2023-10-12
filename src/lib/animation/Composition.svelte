@@ -4,7 +4,9 @@
 >
 	const compositionContextKey = Symbol('composition');
 	export const useComposition = () =>
-		getContext<CompositionContext>(compositionContextKey);
+		getContext<CompositionContext>(compositionContextKey) ?? {
+			composition: undefined,
+		};
 </script>
 
 <script lang="ts">
