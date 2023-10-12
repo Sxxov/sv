@@ -1,6 +1,6 @@
 import { expoIn, expoOut } from 'svelte/easing';
-import type { TransitionConfig } from './common/TransitionConfig';
-import type { Transition } from './common/Transition';
+import type { TransitionConfig } from '../common/TransitionConfig';
+import type { Transition } from '../common/Transition';
 
 export const dropIn: Transition = (
 	element: Element,

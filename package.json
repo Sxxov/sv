@@ -96,6 +96,10 @@
 			"types": "./dist/ut/transition/index.d.ts",
 			"import": "./dist/ut/transition/index.js"
 		},
+		"./ut/transition/transitions": {
+			"types": "./dist/ut/transition/index.d.ts",
+			"import": "./dist/ut/transition/index.js"
+		},
 		"./ut/use": {
 			"types": "./dist/ut/use/index.d.ts",
 			"import": "./dist/ut/use/index.js"
