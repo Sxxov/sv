@@ -1,4 +1,4 @@
-import type { Transition } from '../common/Transition';
+import type { Transition } from '../Transition';
 
 export const sustain: Transition = () => ({
 	delay: 0,

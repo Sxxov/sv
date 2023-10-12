@@ -1,7 +1,7 @@
 import { quintIn, quintInOut, quintOut } from 'svelte/easing';
-import type { TransitionConfig } from '../common/TransitionConfig';
-import type { Transition } from '../common/Transition';
-import type { TransitionFrame } from '../common/TransitionFrame';
+import type { TransitionConfig } from '../TransitionConfig';
+import type { Transition } from '../Transition';
+import type { TransitionFrame } from '../TransitionFrame';
 
 export const scale: Transition = (
 	element: Element,
