@@ -10,18 +10,29 @@
 </script>
 
 <script lang="ts">
-	import { Composition, type Timeline } from '@sxxov/ut/animation';
+	import { Composition as C, type Timeline } from '@sxxov/ut/animation';
 	import { getContext, onDestroy, setContext } from 'svelte';
 	import type { CompositionContext } from './CompositionContext';
 
+	type $$Props =
+		| {
+				is: typeof is;
+		  }
+		| {
+				timeline: typeof timeline;
+		  };
+
+	export let is: C | undefined = undefined;
 	export let timeline: Timeline | undefined = undefined;
 
-	const composition = new Composition(timeline);
+	export const composition: C = is ?? new C(timeline);
 
-	setContext<CompositionContext>(compositionContextKey, { composition });
+	setContext<CompositionContext>(compositionContextKey, {
+		composition,
+	});
 
 	onDestroy(() => {
-		composition.destroy();
+		if (!is) composition.destroy();
 	});
 </script>
 
