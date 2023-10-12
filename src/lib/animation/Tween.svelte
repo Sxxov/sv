@@ -14,7 +14,7 @@
 				start: typeof start;
 				end: typeof end;
 				duration: typeof duration;
-				bezier: typeof bezier;
+				bezier?: typeof bezier;
 		  }
 	);
 
