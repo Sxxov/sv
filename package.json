@@ -97,8 +97,8 @@
 			"import": "./dist/ut/transition/index.js"
 		},
 		"./ut/transition/transitions": {
-			"types": "./dist/ut/transition/index.d.ts",
-			"import": "./dist/ut/transition/index.js"
+			"types": "./dist/ut/transition/transitions/index.d.ts",
+			"import": "./dist/ut/transition/transitions/index.js"
 		},
 		"./ut/action": {
 			"types": "./dist/ut/action/index.d.ts",
