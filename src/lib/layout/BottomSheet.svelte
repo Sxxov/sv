@@ -13,8 +13,8 @@
 
 <script lang="ts">
 	import { css, type Css } from '@sxxov/ut/css';
-	import { whenResize } from '../ut/use/whenResize';
-	import { whenScroll } from '../ut/use/whenScroll';
+	import { whenResize } from '../ut/action/actions/whenResize';
+	import { whenScroll } from '../ut/action/actions/whenScroll';
 
 	export let state: BottomSheetStates;
 	export let backgroundColour: Css = '----colour-background-secondary';

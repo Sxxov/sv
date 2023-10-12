@@ -14,7 +14,7 @@
 
 <script lang="ts">
 	import { onMount, type ComponentProps } from 'svelte';
-	import { dropIn } from '../ut/transition';
+	import { dropIn } from '../ut/transition/transitions';
 
 	import { ButtonVariants } from '../button/ButtonVariants';
 	import Button from '../button/Button.svelte';

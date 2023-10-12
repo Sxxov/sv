@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { whenResize } from '../ut/use/whenResize';
+	import { whenResize } from '../ut/action/actions/whenResize';
 
 	import { css, type Css } from '@sxxov/ut/css';
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { quintOut } from 'svelte/easing';
-	import { fadeIn, fadeOut } from '../ut/transition/fade';
-	import { dropIn, dropOut } from '../ut/transition/drop';
+	import { fadeIn, fadeOut } from '../ut/transition/transitions/fade';
+	import { dropIn, dropOut } from '../ut/transition/transitions/drop';
 
 	export let isActive = false;
 	export let shouldDismissOnOverlayClick = true;

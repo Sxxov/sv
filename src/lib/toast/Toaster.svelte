@@ -19,7 +19,7 @@
 	import { ic_clear } from 'maic/two_tone';
 	import { onMount, onDestroy } from 'svelte';
 	import { css } from '@sxxov/ut/css';
-	import { dropIn, dropOut } from '../ut/transition/drop';
+	import { dropIn, dropOut } from '../ut/transition/transitions/drop';
 	import Button from '../button/Button.svelte';
 	import { ButtonVariants } from '../button/ButtonVariants';
 	import Svg from '../svg/Svg.svelte';

@@ -18,7 +18,7 @@
 	 * is received.
 	 */
 
-	import { Composition, Tween } from '@sxxov/ut/animation';
+	import { Composition, Timeline, Tween } from '@sxxov/ut/animation';
 	import { bezierExpoOut } from '@sxxov/ut/bezier/beziers';
 	import { css, type Css } from '@sxxov/ut/css';
 
@@ -27,7 +27,7 @@
 	import { resolvePointerFromEvent, type Point } from '@sxxov/ut/viewport';
 	import { onDestroy, onMount } from 'svelte';
 	import Rr from '../functional/Rr.svelte';
-	import { whenResize } from '../ut/use/whenResize';
+	import { whenResize } from '../ut/action/actions/whenResize';
 
 	/** The width of the ripple surface. */
 	export let width: Css = '100%';
@@ -94,7 +94,7 @@
 	// → mousedown (timestamp: y)
 	// → mouseup (timestamp: y)
 	let isTouching = false;
-	const onDown = (event: MouseEvent | TouchEvent) => {
+	const onDown = async (event: MouseEvent | TouchEvent) => {
 		if (typeof TouchEvent !== 'undefined' && event instanceof TouchEvent)
 			isTouching = true;
 
@@ -116,7 +116,6 @@
 		)
 			return;
 
-		// Setup the animation for the ripple.
 		const tweenSize = new Tween(20, size, duration);
 		const tweenOpacity = new Tween(
 			opacityIn,
@@ -124,6 +123,17 @@
 			duration,
 			bezierExpoOut,
 		);
+		const composition = new Composition(
+			new Timeline([
+				{
+					tween: tweenSize,
+				},
+				{
+					tween: tweenOpacity,
+				},
+			] as const),
+		);
+
 		const rippleDatum = {
 			point: {
 				x: rippleX,
@@ -132,25 +142,16 @@
 			tweenSize,
 			tweenOpacity,
 		};
-		void new Composition([
-			{
-				tween: tweenSize,
-				delay: 0,
-			},
-			{
-				tween: tweenOpacity,
-				delay: 0,
-			},
-		])
-			.play()
-			.then(() => {
-				// Remove the ripple from the list of ripples.
-				rippleData.splice(rippleData.indexOf(rippleDatum), 1);
-				rippleData = rippleData;
-			});
 
 		// Add the ripple to the list of ripples.
 		rippleData.push(rippleDatum);
+		rippleData = rippleData;
+
+		composition.seekToProgress(0);
+		await composition.play();
+
+		// Remove the ripple from the list of ripples.
+		rippleData.splice(rippleData.indexOf(rippleDatum), 1);
 		rippleData = rippleData;
 	};
 
