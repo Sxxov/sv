@@ -2,7 +2,7 @@
 	import { Tween as Tw, type TimelineAt } from '@sxxov/ut/animation';
 	import type { ReadableBezier } from '@sxxov/ut/bezier';
 	import { onDestroy } from 'svelte';
-	import { useComposition } from '.';
+	import { useComposition } from './useComposition';
 
 	type $$Props = {
 		at?: typeof at;
@@ -27,7 +27,7 @@
 
 	export const tween = is ?? new Tw(start!, end!, duration!, bezier);
 
-	const { composition } = useComposition();
+	const { composition } = useComposition() ?? {};
 	composition?.add(tween, at);
 
 	onDestroy(() => {

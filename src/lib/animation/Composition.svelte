@@ -2,16 +2,12 @@
 	lang="ts"
 	context="module"
 >
-	const compositionContextKey = Symbol('composition');
-	export const useComposition = () =>
-		getContext<CompositionContext>(compositionContextKey) ?? {
-			composition: undefined,
-		};
+	export const compositionContextKey = Symbol('composition');
 </script>
 
 <script lang="ts">
 	import { Composition as C, type Timeline } from '@sxxov/ut/animation';
-	import { getContext, onDestroy, setContext } from 'svelte';
+	import { onDestroy, setContext } from 'svelte';
 	import type { CompositionContext } from './CompositionContext';
 
 	type $$Props =
