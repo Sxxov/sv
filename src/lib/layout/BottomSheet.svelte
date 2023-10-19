@@ -17,7 +17,8 @@
 	import { whenScroll } from '../ut/action/actions/whenScroll';
 
 	export let state: BottomSheetStates;
-	export let backgroundColour: Css = '----colour-background-secondary';
+	export let colourBackground: Css = '----colour-background-secondary';
+	export let colourBorder: Css = '----colour-background-tertiary';
 	export let width: Css = '100%';
 	export let fullHeight: Css = '100vh';
 	export let peekHeight: Css = '50vh';
@@ -170,7 +171,8 @@
 <div
 	class="bottom-sheet"
 	style="
-		--colour-background: {css(backgroundColour)};
+		--colour-background: {css(colourBackground)};
+		--colour-border: {css(colourBorder)};
 		--width: {css(width)};
 		--height-idle: {css(idleHeight)};
 		--height-peek: {css(peekHeight)};
@@ -302,6 +304,7 @@
 			overflow: hidden;
 			overflow: clip;
 			background: var(--colour-background);
+			border: 1px solid var(--colour-border);
 
 			box-shadow: 0 0 32px -1px rgb(17 24 39 / 60%);
 
