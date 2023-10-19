@@ -123,16 +123,9 @@
 			duration,
 			bezierExpoOut,
 		);
-		const composition = new Composition(
-			new Timeline([
-				{
-					tween: tweenSize,
-				},
-				{
-					tween: tweenOpacity,
-				},
-			] as const),
-		);
+		const composition = new Composition()
+			.add(tweenSize, { time: 0 })
+			.add(tweenOpacity, { time: 0 });
 
 		const rippleDatum = {
 			point: {
