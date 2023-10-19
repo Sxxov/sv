@@ -18,6 +18,7 @@
 
 	export let state: BottomSheetStates;
 	export let backgroundColour: Css = '----colour-background-secondary';
+	export let width: Css = '100%';
 	export let fullHeight: Css = '100vh';
 	export let peekHeight: Css = '50vh';
 	export let idleHeight: Css = 0;
@@ -170,6 +171,7 @@
 	class="bottom-sheet"
 	style="
 		--colour-background: {css(backgroundColour)};
+		--width: {css(width)};
 		--height-idle: {css(idleHeight)};
 		--height-peek: {css(peekHeight)};
 		--height-full: {css(fullHeight)};
@@ -192,6 +194,8 @@
 	on:mousemove={onDragMove}
 	on:touchmove={onDragMove}
 	on:mouseup={onDragEnd}
+	on:mouseout={onDragEnd}
+	on:blur={onDragEnd}
 	on:touchend={onDragEnd}
 	on:touchcancel={onDragEnd}
 	on:drag={onDragRelease}
@@ -288,10 +292,11 @@
 		& > .container {
 			position: absolute;
 			bottom: 0;
-			left: 0;
-			height: var(--height-curr);
+			left: 50%;
+			transform: translateX(-50%);
 
-			width: 100%;
+			height: var(--height-curr);
+			width: var(--width);
 
 			border-radius: var(--roundness) var(--roundness) 0 0;
 			overflow: hidden;
