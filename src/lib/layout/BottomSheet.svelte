@@ -277,7 +277,7 @@
 			top: 0;
 			left: 0;
 
-			background: var(--colour-overlay);
+			background: var(----colour-overlay);
 			opacity: var(--opacity);
 
 			pointer-events: auto;
