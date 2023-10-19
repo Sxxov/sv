@@ -19,9 +19,7 @@
 		on:keydown={(event) => {
 			if (event.key === 'Escape') event.currentTarget.click();
 		}}
-	>
-		<slot name="overlay" />
-	</div>
+	/>
 	<div
 		class="default content"
 		in:dropIn
