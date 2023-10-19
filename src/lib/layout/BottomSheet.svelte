@@ -22,6 +22,7 @@
 	export let peekHeight: Css = '50vh';
 	export let idleHeight: Css = 0;
 	export let threshold = 0.25;
+	export let roundness: Css = '----roundness';
 
 	let currHeight: Css;
 
@@ -175,6 +176,7 @@
 		--height-curr: clamp(var(--height-idle), calc({css(
 		currHeight,
 	)} + {deltaY}px), var(--height-full));
+		--roundness: {css(roundness)};
 	"
 	role="combobox"
 	aria-haspopup="listbox"
