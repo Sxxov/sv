@@ -3,26 +3,18 @@
 	import { fadeIn, fadeOut } from '../ut/transition/transitions/fade';
 	import { dropIn, dropOut } from '../ut/transition/transitions/drop';
 
-	export let isActive = false;
-	export let shouldDismissOnOverlayClick = true;
-
-	function dismiss() {
-		isActive = false;
-	}
-
-	function show() {
-		isActive = true;
-	}
+	export let active = false;
+	export let remainOnOverlayClick = false;
 </script>
 
-{#if isActive}
+{#if active}
 	<div
 		class="overlay"
 		role="presentation"
 		in:fadeIn
 		out:fadeOut={{ easing: quintOut }}
 		on:click={() => {
-			if (shouldDismissOnOverlayClick) isActive = false;
+			if (!remainOnOverlayClick) active = false;
 		}}
 		on:keydown={(event) => {
 			if (event.key === 'Escape') event.currentTarget.click();
@@ -37,9 +29,13 @@
 			<slot name="top-right" />
 		</div>
 		<slot
-			{isActive}
-			{dismiss}
-			{show}
+			{active}
+			dismiss={() => {
+				active = false;
+			}}
+			show={() => {
+				active = true;
+			}}
 		/>
 		<div class="default buttons">
 			<slot name="buttons" />
