@@ -194,7 +194,7 @@
 	on:mousemove={onDragMove}
 	on:touchmove={onDragMove}
 	on:mouseup={onDragEnd}
-	on:mouseout={onDragEnd}
+	on:mouseleave={onDragEnd}
 	on:blur={onDragEnd}
 	on:touchend={onDragEnd}
 	on:touchcancel={onDragEnd}
