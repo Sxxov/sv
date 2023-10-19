@@ -9,6 +9,9 @@
 	import { InputVariants } from '../lib/input/InputVariants';
 	import Toaster, { toasts } from '../lib/toast/Toaster.svelte';
 	import { Levels } from '../lib/common/enums';
+	import BottomSheet, {
+		BottomSheetStates,
+	} from '../lib/layout/BottomSheet.svelte';
 
 	toasts.push({
 		text: 'hello',
@@ -115,6 +118,12 @@
 		name="bbb"
 		label="aaaaaaaaaaaaaa"
 	/>
+	<BottomSheet
+		state={BottomSheetStates.PEEK}
+		width="50%"
+	>
+		<h1>AAAAA</h1>
+	</BottomSheet>
 </div>
 
 <style lang="postcss">
