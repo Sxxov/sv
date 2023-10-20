@@ -15,6 +15,8 @@
 	import { css, type Css } from '@sxxov/ut/css';
 	import { whenResize } from '../ut/action/actions/whenResize';
 	import { whenScroll } from '../ut/action/actions/whenScroll';
+	import { clamp01, lerp, map, map01 } from '@sxxov/ut/math';
+	import { bezierQuintOut, bezierSineOut } from '@sxxov/ut/bezier/beziers';
 
 	export let state: BottomSheetStates;
 	export let colourBackground: Css = '----colour-background-secondary';
@@ -28,6 +30,7 @@
 
 	let currHeight: Css;
 
+	let scrollHeightComputed = 0;
 	let fullHeightComputed = 0;
 	let peekHeightComputed = 0;
 	let idleHeightComputed = 0;
@@ -40,6 +43,7 @@
 	let startY = NaN;
 	let deltaY = 0;
 	let scrollY = 0;
+	let overscrollY = 0;
 
 	$: opacity =
 		currHeightComputed === 0 && peekHeightComputed === 0
@@ -62,7 +66,7 @@
 			currHeightComputed === idleHeightComputed ||
 			(state & BottomSheetStates.FULL &&
 				currHeightComputed === peekHeightComputed) ||
-			currHeightComputed === idleHeightComputed ||
+			currHeightComputed === fullHeightComputed ||
 			(state & BottomSheetStates.IDLE &&
 				currHeightComputed === fullHeightComputed) ||
 			currHeightComputed === peekHeightComputed
@@ -70,25 +74,77 @@
 			state &= ~BottomSheetStates.SETTLING;
 		else state |= BottomSheetStates.SETTLING;
 
+	function onWheel(event: WheelEvent) {
+		if (!canDrag) return;
+
+		if (state & BottomSheetStates.SETTLING) {
+			event.preventDefault();
+			return;
+		}
+
+		if (event.deltaY > 0) {
+			if (state & BottomSheetStates.FULL) return;
+			if (state & BottomSheetStates.PEEK) {
+				state &= ~BottomSheetStates.PEEK;
+				state |= BottomSheetStates.FULL;
+			} else return;
+		} else {
+			if (state & BottomSheetStates.PEEK) return;
+			if (state & BottomSheetStates.FULL) {
+				state &= ~BottomSheetStates.FULL;
+				state |= BottomSheetStates.PEEK;
+			} else return;
+		}
+
+		deltaY = event.deltaY;
+		onDragRelease();
+
+		event.preventDefault();
+	}
+
+	let dragDirection = 0;
 	function onDragStart(event: MouseEvent | TouchEvent) {
 		isDragging = true;
+		dragDirection = 0;
+		[, startY] = resolvePageCoordinates(event);
 
 		if (!canDrag) return;
 
 		if (!hasParentElem(event.target as HTMLElement, contentDiv!)) return;
 
-		[, startY] = resolvePageCoordinates(event);
 		state |= BottomSheetStates.DRAGGING;
 	}
 
 	function onDragMove(event: MouseEvent | TouchEvent) {
 		if (!isDragging) return;
 
+		const [, y] = resolvePageCoordinates(event);
+		const dy = startY - y;
+
+		dragDirection ||= Math.sign(dy);
+
 		if (
-			!(state & BottomSheetStates.FULL) ||
-			currHeightComputed !== fullHeightComputed
-		)
-			event.preventDefault();
+			state & BottomSheetStates.FULL ||
+			currHeightComputed === fullHeightComputed
+		) {
+			if (dragDirection < 0 && scrollY <= 0) {
+				event.preventDefault();
+			}
+
+			if (
+				dragDirection > 0 &&
+				scrollY >= scrollHeightComputed - fullHeightComputed - 1
+			) {
+				event.preventDefault();
+				overscrollY = lerp(
+					bezierSineOut.at(clamp01(map01(dy, 0, fullHeightComputed))),
+					0,
+					fullHeightComputed / 2,
+				);
+			}
+		} else event.preventDefault();
+
+		if (!(state & BottomSheetStates.DRAGGING)) return;
 
 		// const { top, left, height, width } =
 		// 	contentDiv!.getBoundingClientRect();
@@ -103,13 +159,15 @@
 
 		if (!canDrag || Number.isNaN(startY)) return;
 
-		const [, y] = resolvePageCoordinates(event);
-		deltaY = startY - y;
+		deltaY = dy;
 	}
 
 	function onDragEnd() {
 		isDragging = false;
+		dragDirection = 0;
 
+		startY = NaN;
+		overscrollY = 0;
 		onDragRelease();
 	}
 
@@ -144,7 +202,6 @@
 		)
 			state = BottomSheetStates.PEEK;
 
-		startY = NaN;
 		deltaY = 0;
 	}
 
@@ -181,6 +238,7 @@
 		currHeight,
 	)} + {deltaY}px), var(--height-full));
 		--roundness: {css(roundness)};
+		--overscroll: {overscrollY}px;
 	"
 	role="combobox"
 	aria-haspopup="listbox"
@@ -200,7 +258,7 @@
 	on:blur={onDragEnd}
 	on:touchend={onDragEnd}
 	on:touchcancel={onDragEnd}
-	on:drag={onDragRelease}
+	on:mousewheel={onWheel}
 >
 	{#if !(state & BottomSheetStates.IDLE) || state & BottomSheetStates.SETTLING}
 		<div
@@ -215,6 +273,7 @@
 			on:keydown={(event) => {
 				if (event.key === 'Escape') event.currentTarget.click();
 			}}
+			on:touchmove|preventDefault
 		/>
 	{/if}
 	<div
@@ -229,6 +288,13 @@
 			style=""
 			bind:this={contentDiv}
 			on:scroll={onDragRelease}
+			on:scroll={() => {
+				if (!(state & BottomSheetStates.FULL))
+					state = BottomSheetStates.FULL;
+			}}
+			use:whenResize={() => {
+				scrollHeightComputed = contentDiv?.scrollHeight ?? 0;
+			}}
 			use:whenScroll={({ y }) => {
 				scrollY = y;
 			}}
@@ -324,6 +390,9 @@
 				width: 100%;
 
 				overflow: auto;
+
+				transform: translateY(calc(-1 * var(--overscroll)));
+				transition: transform 0.5s var(----ease-fast-slow);
 			}
 
 			& > .overlay {
