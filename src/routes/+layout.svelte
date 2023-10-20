@@ -1,5 +1,15 @@
 <slot />
 
+<svelte:head>
+	<meta charset="utf-8" />
+
+	<!-- Viewport Tag to prevent jank -->
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1"
+	/>
+</svelte:head>
+
 <style lang="postcss">
 	:global(:root) {
 		----font-family-display: 'Gloock', 'Times New Roman', serif;
