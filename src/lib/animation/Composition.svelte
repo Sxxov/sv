@@ -6,9 +6,15 @@
 </script>
 
 <script lang="ts">
-	import { Composition as C, type Timeline } from '@sxxov/ut/animation';
+	import {
+		Composition as C,
+		type CompositionFrame,
+		type Timeline,
+	} from '@sxxov/ut/animation';
 	import { onDestroy, setContext } from 'svelte';
 	import type { CompositionContext } from './CompositionContext';
+
+	type V = $$Generic<TimelineSegmentValue>;
 
 	type $$Props =
 		| {
@@ -18,12 +24,12 @@
 				timeline?: typeof timeline;
 		  };
 
-	export let is: C | undefined = undefined;
-	export let timeline: Timeline | undefined = undefined;
+	export let is: C<V> | undefined = undefined;
+	export let timeline: Timeline<V> | undefined = undefined;
 
-	export const composition: C = is ?? new C(timeline);
+	export const composition = is ?? new C(timeline);
 
-	setContext<CompositionContext>(compositionContextKey, {
+	setContext<CompositionContext<V>>(compositionContextKey, {
 		composition,
 	});
 
