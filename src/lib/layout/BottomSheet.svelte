@@ -258,7 +258,7 @@
 	on:blur={onDragEnd}
 	on:touchend={onDragEnd}
 	on:touchcancel={onDragEnd}
-	on:mousewheel={onWheel}
+	on:wheel={onWheel}
 >
 	{#if !(state & BottomSheetStates.IDLE) || state & BottomSheetStates.SETTLING}
 		<div
