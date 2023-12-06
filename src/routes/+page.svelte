@@ -47,6 +47,7 @@
 		label="number"
 		type="number"
 		inputmode="decimal"
+		value={0}
 	/>
 	<Input
 		name="c"
@@ -78,6 +79,7 @@
 			label="textarea auto limited"
 			multiline
 			height="100%"
+			value={''}
 		/>
 	</div>
 	<Button {...ButtonVariants.Fab.Md}><Svg svg={ic_check} /></Button>
@@ -126,21 +128,24 @@
 	/>
 	<BottomSheet
 		state={BottomSheetStates.PEEK}
-		width="50%"
+		width="min(600px, 100%)"
+		idleHeight={90}
 	>
-		<h1>AAAAA</h1>
-		<h1>AAAAA</h1>
-		<h1>AAAAA</h1>
-		<h1>AAAAA</h1>
-		<h1>AAAAA</h1>
-		<h1>AAAAA</h1>
-		<h1>AAAAA</h1>
-		<h1>AAAAA</h1>
-		<h1>AAAAA</h1>
-		<h1>AAAAA</h1>
-		<h1>AAAAA</h1>
-		<h1>AAAAA</h1>
-		<h1>AAAAA</h1>
+		<div class="content">
+			<h1>AAAAA</h1>
+			<h1>AAAAA</h1>
+			<h1>AAAAA</h1>
+			<h1>AAAAA</h1>
+			<h1>AAAAA</h1>
+			<h1>AAAAA</h1>
+			<h1>AAAAA</h1>
+			<h1>AAAAA</h1>
+			<h1>AAAAA</h1>
+			<h1>AAAAA</h1>
+			<h1>AAAAA</h1>
+			<h1>AAAAA</h1>
+			<h1>AAAAA</h1>
+		</div>
 	</BottomSheet>
 </div>
 

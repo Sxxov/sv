@@ -5,8 +5,11 @@
 	import Button from '../button/Button.svelte';
 	import { ButtonVariants } from '../button/ButtonVariants';
 	import Svg from '../svg/Svg.svelte';
+	import type { HTMLInputAttributes } from 'svelte/elements';
 
-	type $$Props = svelteHTML.IntrinsicElements['input'] & {
+	type T = $$Generic<HTMLInputAttributes['type']>;
+	type V = T extends 'number' ? number : string;
+	type $$Props = HTMLInputAttributes & {
 		colourBackground?: typeof colourBackground;
 		colourBackgroundHover?: typeof colourBackgroundHover;
 		colourBackgroundFocus?: typeof colourBackgroundFocus;
@@ -23,8 +26,8 @@
 		width?: typeof width;
 		id?: typeof id;
 		placeholder?: typeof placeholder;
-		type?: typeof type;
-		value?: typeof value;
+		type?: T;
+		value?: V;
 		step?: typeof step;
 		active?: typeof active;
 		multiline?: typeof multiline;
@@ -48,8 +51,8 @@
 	export let width: Css = '100%';
 	export let id: string | undefined = undefined;
 	export let placeholder = '';
-	export let type: HTMLInputElement['type'] = 'text';
-	export let value = type === 'number' ? '0' : '';
+	export let type: T = 'text' as T;
+	export let value = (type === 'number' ? 0 : '') as V;
 	export let step = '1';
 	export let active = false;
 	export let multiline = false;
@@ -66,10 +69,14 @@
 		if (multiline) scrollHeight = input!.scrollHeight;
 	});
 
+	const asV = (v: string | number): V =>
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+		(number ? Number(v) : String(v)) as V;
+
 	const onSynch = () => {
 		if (!input) return;
 
-		value = input.value;
+		value = asV(input.value);
 
 		if (multiline) {
 			input.style.height = '0px';
@@ -123,14 +130,8 @@
 						roundness="calc(var(----roundness) - 7px)"
 						on:click={() => {
 							if (input) {
-								input.value = String(
-									// limit float to 15 decimal places
-									// fixes 0.30000000000000004
-									Number(
-										(
-											Number(input.value) - Number(step)
-										).toFixed(15),
-									),
+								value = asV(
+									(Number(value) - Number(step)).toFixed(15),
 								);
 							}
 						}}
@@ -192,14 +193,8 @@
 						padding={0}
 						on:click={() => {
 							if (input) {
-								input.value = String(
-									// limit float to 15 decimal places
-									// fixes 0.30000000000000004
-									Number(
-										(
-											Number(input.value) + Number(step)
-										).toFixed(15),
-									),
+								value = asV(
+									(Number(value) + Number(step)).toFixed(15),
 								);
 							}
 						}}><Svg svg={ic_add} /></Button
