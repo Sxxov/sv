@@ -124,12 +124,12 @@
 						on:click={() => {
 							if (input) {
 								input.value = String(
-									// limit float to 16 decimal places
+									// limit float to 15 decimal places
 									// fixes 0.30000000000000004
 									Number(
 										(
 											Number(input.value) - Number(step)
-										).toFixed(16),
+										).toFixed(15),
 									),
 								);
 							}
@@ -193,12 +193,12 @@
 						on:click={() => {
 							if (input) {
 								input.value = String(
-									// limit float to 16 decimal places
+									// limit float to 15 decimal places
 									// fixes 0.30000000000000004
 									Number(
 										(
-											Number(input.value) - Number(step)
-										).toFixed(16),
+											Number(input.value) + Number(step)
+										).toFixed(15),
 									),
 								);
 							}
