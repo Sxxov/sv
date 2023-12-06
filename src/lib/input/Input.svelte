@@ -1,10 +1,35 @@
 <script lang="ts">
 	import { css, type Css } from '@sxxov/ut/css';
-	import Button from '../button/Button.svelte';
-	import Svg from '../svg/Svg.svelte';
-	import { ic_clear } from 'maic/two_tone';
-	import { ButtonVariants } from '../button/ButtonVariants';
+	import { ic_add, ic_clear, ic_remove } from 'maic/two_tone';
 	import { onMount } from 'svelte';
+	import Button from '../button/Button.svelte';
+	import { ButtonVariants } from '../button/ButtonVariants';
+	import Svg from '../svg/Svg.svelte';
+
+	type $$Props = svelteHTML.IntrinsicElements['input'] & {
+		colourBackground?: typeof colourBackground;
+		colourBackgroundHover?: typeof colourBackgroundHover;
+		colourBackgroundFocus?: typeof colourBackgroundFocus;
+		colourText?: typeof colourText;
+		colourTextHover?: typeof colourTextHover;
+		colourTextFocus?: typeof colourTextFocus;
+		colourLabel?: typeof colourLabel;
+		colourLabelValued?: typeof colourLabelValued;
+		shadow?: typeof shadow;
+		shadowHover?: typeof shadowHover;
+		shadowFocus?: typeof shadowFocus;
+		name: typeof name;
+		label?: typeof label;
+		width?: typeof width;
+		id?: typeof id;
+		placeholder?: typeof placeholder;
+		type?: typeof type;
+		value?: typeof value;
+		step?: typeof step;
+		active?: typeof active;
+		multiline?: typeof multiline;
+		height?: typeof height;
+	};
 
 	export let colourBackground: Css = '----colour-background-secondary';
 	export let colourBackgroundHover: Css = '----colour-background-tertiary';
@@ -23,19 +48,19 @@
 	export let width: Css = '100%';
 	export let id: string | undefined = undefined;
 	export let placeholder = '';
-	export let value = '';
-	export let autocomplete: HTMLInputElement['autocomplete'] = 'off';
 	export let type: HTMLInputElement['type'] = 'text';
+	export let value = type === 'number' ? '0' : '';
+	export let step = '1';
 	export let active = false;
 	export let multiline = false;
 	export let height: Css = label ? (multiline ? 'auto' : '112px') : '56px';
-	export let tabindex = 0;
 
 	let input: HTMLInputElement | HTMLTextAreaElement | undefined;
 	let scrollHeight = 112;
 
 	$: id ??= `input--${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 	$: active ? input?.focus() : input?.blur();
+	$: number = type === 'number';
 
 	onMount(() => {
 		if (multiline) scrollHeight = input!.scrollHeight;
@@ -76,26 +101,54 @@
 		? 'var(----roundness) 0 var(----roundness) var(----roundness)'
 		: 'var(----roundness)'};
 	"
-	class:left={$$slots.left}
+	class:left={$$slots.left || number}
 	class:right={$$slots.right || true}
+	class:number
 >
-	<div class="left">
+	<div class="left aux">
 		<slot
 			name="left"
 			{value}
-		/>
+		>
+			{#if number}
+				<div class="de crement">
+					<Button
+						{...ButtonVariants.Fab.Md}
+						{...ButtonVariants.Transparent}
+						colourBackground="transparent"
+						tabindex={-1}
+						width={35}
+						height={35}
+						padding={0}
+						roundness="calc(var(----roundness) - 7px)"
+						on:click={() => {
+							if (input) {
+								input.value = String(
+									Number(input.value) - Number(step),
+								);
+							}
+						}}
+						><Svg
+							width={24}
+							svg={ic_remove}
+						/></Button
+					>
+				</div>
+			{/if}
+		</slot>
 	</div>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<svelte:element
 		this={multiline ? 'textarea' : 'input'}
+		{...$$restProps}
 		{id}
 		class="target"
+		class:textarea={multiline}
+		class:input={!multiline}
 		{type}
 		placeholder={placeholder || ' '}
-		{autocomplete}
 		{value}
 		{name}
-		{tabindex}
 		bind:this={input}
 		on:input
 		on:input={onSynch}
@@ -116,25 +169,46 @@
 			--height-input: {multiline ? css(scrollHeight) : '100%'};
 		"
 	/>
-	<div class="right">
+	<div class="right aux">
 		<slot
 			name="right"
 			{value}
 		>
-			<div class="clear">
-				<Button
-					{...ButtonVariants.Fab.Md}
-					{...ButtonVariants.Transparent}
-					colourBackground="transparent"
-					tabindex={-1}
-					on:click={() => {
-						if (input) {
-							input.value = '';
-							input.focus();
-						}
-					}}><Svg svg={ic_clear} /></Button
-				>
-			</div>
+			{#if number}
+				<div class="in crement">
+					<Button
+						{...ButtonVariants.Fab.Md}
+						{...ButtonVariants.Transparent}
+						colourBackground="transparent"
+						tabindex={-1}
+						width={42}
+						height={42}
+						padding={0}
+						on:click={() => {
+							if (input) {
+								input.value = String(
+									Number(input.value) + Number(step),
+								);
+							}
+						}}><Svg svg={ic_add} /></Button
+					>
+				</div>
+			{:else}
+				<div class="clear">
+					<Button
+						{...ButtonVariants.Fab.Md}
+						{...ButtonVariants.Transparent}
+						colourBackground="transparent"
+						tabindex={-1}
+						on:click={() => {
+							if (input) {
+								input.value = '';
+								input.focus();
+							}
+						}}><Svg svg={ic_clear} /></Button
+					>
+				</div>
+			{/if}
 		</slot>
 	</div>
 	{#if label || $$slots['label-left'] || $$slots['label-right']}
@@ -162,6 +236,9 @@
 		min-height: inherit;
 		max-height: inherit;
 
+		--margin-label: calc(max(var(----roundness), 28px) - 17.5px);
+		--padding-input-y: calc(var(--margin-label) + 1.28em / 2);
+
 		& > label {
 			position: absolute;
 
@@ -170,8 +247,8 @@
 			justify-content: center;
 			gap: 7px;
 
-			top: calc(max(var(----roundness), 28px) - 17.5px);
-			left: calc(max(var(----roundness), 28px) - 17.5px);
+			top: var(--margin-label);
+			left: var(--margin-label);
 
 			color: var(--colour-label);
 			font-size: 1em;
@@ -184,6 +261,8 @@
 			border-radius: var(----roundness);
 
 			box-shadow: var(----shadow-inner-sm);
+
+			z-index: 2;
 		}
 
 		& > .target:-webkit-autofill ~ label,
@@ -206,14 +285,15 @@
 			font-family: var(----font-family-sans);
 			text-align: inherit;
 
-			--padding-input-y: calc(((56px + 14px) - 1.28em) / 2);
-
 			padding: 0 max(var(----roundness), 28px);
-			padding-bottom: var(--padding-input-y);
-			padding-top: calc(var(--top-input) + var(--padding-input-y));
+			padding-top: calc(var(--top-input) + var(--margin-label) + 10.5px);
+			padding-bottom: calc(var(--margin-label) + 10.5px);
 			box-sizing: border-box;
 
 			border-radius: var(----roundness);
+			border-top-left-radius: calc(
+				var(----roundness) + var(--margin-label)
+			);
 
 			background: var(--colour-background);
 			border: 0;
@@ -249,51 +329,59 @@
 				transition: var(--transition), outline 0s;
 				outline: 1px solid var(----colour-text-tertiary);
 			}
+
+			&.input[type='number'] {
+				-moz-appearance: textfield;
+
+				&::-webkit-outer-spin-button,
+				&::-webkit-inner-spin-button {
+					display: none;
+				}
+			}
+		}
+
+		& > .aux {
+			position: absolute;
+			top: 0;
+			padding-top: var(--top-slot);
+			box-sizing: border-box;
+			height: 100%;
+
+			z-index: 1;
+
+			pointer-events: none;
+
+			&.left {
+				left: 0;
+			}
+
+			&.right {
+				right: 0;
+			}
+
+			& > .clear {
+				top: 100%;
+				transform: translateY(-100%);
+				position: relative;
+			}
+
+			& > .crement {
+				padding: 10.5px;
+				padding-top: 3.5px;
+			}
+
+			& > :global(*) {
+				pointer-events: auto;
+			}
 		}
 
 		&.left {
-			& > .left {
-				position: absolute;
-				top: 0;
-				left: 0;
-				padding-top: var(--top-slot);
-				box-sizing: border-box;
-				height: 100%;
-
-				pointer-events: none;
-
-				& > :global(*) {
-					pointer-events: auto;
-				}
-			}
-
 			& > .target {
 				padding-left: 56px;
 			}
 		}
 
 		&.right {
-			& > .right {
-				position: absolute;
-				top: 0;
-				right: 0;
-				padding-top: var(--top-slot);
-				box-sizing: border-box;
-				height: 100%;
-
-				pointer-events: none;
-
-				& > :global(*) {
-					pointer-events: auto;
-				}
-
-				& > .clear {
-					top: 100%;
-					transform: translateY(-100%);
-					position: relative;
-				}
-			}
-
 			& > .target {
 				padding-right: 56px;
 			}

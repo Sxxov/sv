@@ -43,6 +43,12 @@
 		label=""
 	/>
 	<Input
+		name="n"
+		label="number"
+		type="number"
+		inputmode="decimal"
+	/>
+	<Input
 		name="c"
 		label="textarea"
 		multiline
