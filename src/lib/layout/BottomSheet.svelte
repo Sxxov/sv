@@ -20,6 +20,7 @@
 
 	export let state: BottomSheetStates;
 	export let colourBackground: Css = '----colour-background-secondary';
+	export let colourUnderlay: Css = '----colour-overlay';
 	export let colourBorder: Css = '----colour-background-tertiary';
 	export let width: Css = '100%';
 	export let fullHeight: Css = '100vh';
@@ -230,6 +231,7 @@
 	style="
 		--colour-background: {css(colourBackground)};
 		--colour-border: {css(colourBorder)};
+		--colour-underlay: {css(colourUnderlay)};
 		--width: {css(width)};
 		--height-idle: {css(idleHeight)};
 		--height-peek: {css(peekHeight)};
@@ -351,7 +353,7 @@
 			top: 0;
 			left: 0;
 
-			background: var(----colour-overlay);
+			background: var(--colour-underlay);
 			opacity: var(--opacity);
 
 			pointer-events: auto;
