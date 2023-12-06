@@ -124,7 +124,13 @@
 						on:click={() => {
 							if (input) {
 								input.value = String(
-									Number(input.value) - Number(step),
+									// limit float to 16 decimal places
+									// fixes 0.30000000000000004
+									Number(
+										(
+											Number(input.value) - Number(step)
+										).toFixed(16),
+									),
 								);
 							}
 						}}
@@ -187,7 +193,13 @@
 						on:click={() => {
 							if (input) {
 								input.value = String(
-									Number(input.value) + Number(step),
+									// limit float to 16 decimal places
+									// fixes 0.30000000000000004
+									Number(
+										(
+											Number(input.value) - Number(step)
+										).toFixed(16),
+									),
 								);
 							}
 						}}><Svg svg={ic_add} /></Button
