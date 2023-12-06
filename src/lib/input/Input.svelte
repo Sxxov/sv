@@ -315,9 +315,6 @@
 			box-sizing: border-box;
 
 			border-radius: var(----roundness);
-			border-top-left-radius: calc(
-				var(----roundness) + var(--margin-label)
-			);
 
 			background: var(--colour-background);
 			border: 0;
