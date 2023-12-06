@@ -9,54 +9,71 @@
 
 	type T = $$Generic<HTMLInputAttributes['type']>;
 	type V = T extends 'number' ? number : string;
-	type $$Props = HTMLInputAttributes & {
-		colourBackground?: typeof colourBackground;
-		colourBackgroundHover?: typeof colourBackgroundHover;
-		colourBackgroundFocus?: typeof colourBackgroundFocus;
-		colourText?: typeof colourText;
-		colourTextHover?: typeof colourTextHover;
-		colourTextFocus?: typeof colourTextFocus;
-		colourLabel?: typeof colourLabel;
-		colourLabelValued?: typeof colourLabelValued;
-		shadow?: typeof shadow;
-		shadowHover?: typeof shadowHover;
-		shadowFocus?: typeof shadowFocus;
-		name: typeof name;
-		label?: typeof label;
-		width?: typeof width;
-		id?: typeof id;
-		placeholder?: typeof placeholder;
+	interface Props {
+		colourBackground?: Css;
+		colourBackgroundHover?: Css;
+		colourBackgroundFocus?: Css;
+		colourText?: Css;
+		colourTextHover?: Css;
+		colourTextFocus?: Css;
+		colourLabel?: Css;
+		colourLabelValued?: Css;
+		shadow?: Css;
+		shadowHover?: Css;
+		shadowFocus?: Css;
+		name: string;
+		label?: string;
+		width?: Css;
+		id?: string;
+		placeholder?: string;
 		type?: T;
 		value?: V;
-		step?: typeof step;
-		active?: typeof active;
-		multiline?: typeof multiline;
-		height?: typeof height;
-	};
+		step?: string;
+		active?: boolean;
+		multiline?: boolean;
+		height?: Css;
+	}
+	type Prop<K extends keyof Props> = {
+		[P in keyof Props]-?: Props[P];
+	}[K];
+	type $$Props = Props & Omit<HTMLInputAttributes, keyof Props>;
 
-	export let colourBackground: Css = '----colour-background-secondary';
-	export let colourBackgroundHover: Css = '----colour-background-tertiary';
-	export let colourBackgroundFocus: Css = '----colour-background-primary';
-	export let colourText: Css = '----colour-text-primary';
-	export let colourTextHover: Css = '----colour-text-primary';
-	export let colourTextFocus: Css = '----colour-text-primary';
-	export let colourLabel: Css = '----colour-text-primary';
-	export let colourLabelValued: Css = '----colour-accent-primary';
-	export let shadow: Css = 'var(----shadow-inner-sm), var(----shadow-sm)';
-	export let shadowHover: Css = shadow;
-	export let shadowFocus: Css =
+	export let colourBackground: Prop<'colourBackground'> =
+		'----colour-background-secondary';
+	export let colourBackgroundHover: Prop<'colourBackgroundHover'> =
+		'----colour-background-tertiary';
+	export let colourBackgroundFocus: Prop<'colourBackgroundFocus'> =
+		'----colour-background-primary';
+	export let colourText: Prop<'colourText'> = '----colour-text-primary';
+	export let colourTextHover: Prop<'colourTextHover'> =
+		'----colour-text-primary';
+	export let colourTextFocus: Prop<'colourTextFocus'> =
+		'----colour-text-primary';
+	export let colourLabel: Prop<'colourLabel'> = '----colour-text-primary';
+	export let colourLabelValued: Prop<'colourLabelValued'> =
+		'----colour-accent-primary';
+	export let shadow: Prop<'shadow'> =
+		'var(----shadow-inner-sm), var(----shadow-sm)';
+	export let shadowHover: Prop<'shadowHover'> = shadow;
+	export let shadowFocus: Prop<'shadowFocus'> =
 		'var(----shadow-inner-sm), var(----shadow-md)';
-	export let name: string;
-	export let label = '';
-	export let width: Css = '100%';
-	export let id: string | undefined = undefined;
-	export let placeholder = '';
-	export let type: T = 'text' as T;
-	export let value = (type === 'number' ? 0 : '') as V;
-	export let step = '1';
-	export let active = false;
-	export let multiline = false;
-	export let height: Css = label ? (multiline ? 'auto' : '112px') : '56px';
+	export let name: Prop<'name'>;
+	export let label: Prop<'label'> = '';
+	export let width: Prop<'width'> = '100%';
+	export let id: Prop<'id'> | undefined = undefined;
+	export let placeholder: Prop<'placeholder'> = '';
+	export let type: Prop<'type'> = 'text' as Prop<'type'>;
+	export let value: Prop<'value'> = (
+		type === 'number' ? 0 : ''
+	) as Prop<'value'>;
+	export let step: Prop<'step'> = '1';
+	export let active: Prop<'active'> = false;
+	export let multiline: Prop<'multiline'> = false;
+	export let height: Prop<'height'> = label
+		? multiline
+			? 'auto'
+			: '112px'
+		: '56px';
 
 	let input: HTMLInputElement | HTMLTextAreaElement | undefined;
 	let scrollHeight = 112;
