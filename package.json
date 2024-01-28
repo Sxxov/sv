@@ -14,7 +14,6 @@
 		"dev": "vite dev --host --https",
 		"build": "svelte-package",
 		"preview": "vite preview",
-		"postinstall": "patch-package",
 		"prepare": "ts-patch install -s",
 		"prepublishOnly": "svelte-package"
 	},
@@ -54,7 +53,6 @@
 		"eslint-config-xo-typescript": "^0.57.0",
 		"eslint-plugin-only-warn": "^1.1.0",
 		"eslint-plugin-prettier": "^4.2.1",
-		"patch-package": "^7.0.0",
 		"postcss": "^8.4.25",
 		"postcss-class-apply": "^4.0.1",
 		"postcss-font-grabber": "^3.1.0",
