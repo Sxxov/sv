@@ -14,7 +14,6 @@
 		"dev": "vite dev --host --https",
 		"build": "svelte-package",
 		"preview": "vite preview",
-		"prepare": "ts-patch install -s",
 		"prepublishOnly": "svelte-package"
 	},
 	"keywords": [
@@ -68,7 +67,6 @@
 		"stylelint": "^15.10.1",
 		"stylelint-config-standard": "^34.0.0",
 		"svelte-preprocess": "^5.0.4",
-		"ts-patch": "^3.0.1",
 		"typescript": "5.1",
 		"uuid": "^9.0.0",
 		"vite": "^4.4.2",
